@@ -234,8 +234,6 @@ void led_pins_init(void) {
 }
 ```
 
-Here `LEDx_OFF()` is the macro-function from the previous section.
-
 <br>
 
 #### 3.3 Modify drivers
