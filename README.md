@@ -1,6 +1,6 @@
-# About User IO
+# About User IO - Porting guide below
 
-User IO is a library for reading buttons and controlling LEDs in a non-blocking way. Add any amount of buttons and LEDs. It needs a timer to trigger its handler every *x* milliseconds to function properly.
+User IO is a library for reading buttons and controlling LEDs in a non-blocking way for embedded applications written in C. Add up to 256 buttons and LEDs to your project and control them easily using User IO. It needs a timer to trigger its handler every *x* milliseconds to function properly.
 
 > **NOTE**
 >
@@ -56,9 +56,9 @@ User IO is a library for reading buttons and controlling LEDs in a non-blocking 
 
 ---
 
-# Setup guide
+# Porting guide
 
-A quick guide on how to properly set up and include the User IO library. Here you must open some source-files and edit lines, i've added `// <-- EDIT HERE` on every line you must edit. 
+A quick guide on how to properly port the User IO library to any embedded platform. Here you must open some source-files and edit lines, i've added `// <-- EDIT HERE` on every line you must edit. 
 
 > **NOTE**
 >
