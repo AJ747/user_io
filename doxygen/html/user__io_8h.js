@@ -2,8 +2,8 @@ var user__io_8h =
 [
     [ "btn_click", "user__io_8h.html#a2e9857026223b1353327e133892a0235", null ],
     [ "btn_depressed", "user__io_8h.html#ae84ad78b43cdea503148f8a823882b12", null ],
-    [ "btn_hold", "user__io_8h.html#a14e2f2625c7baf56773cdfa74ae054bf", null ],
     [ "btn_released", "user__io_8h.html#a896fe6ce2cb4d3788a472bcfdea417b9", null ],
+    [ "interval_reached_ms", "user__io_8h.html#a1069ea42ddc5348f2cff87ddecfdb953", null ],
     [ "led_all_blink_infinite", "user__io_8h.html#a8605f4dd965cfa0dd59cae12e55c7df9", null ],
     [ "led_all_blink_ms", "user__io_8h.html#afd5a9b47453ba148845b8568421b292b", null ],
     [ "led_all_blink_n_times", "user__io_8h.html#a9c1dd4d0289cfb66f528d55f9f34da11", null ],

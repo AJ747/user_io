@@ -26,7 +26,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">User IO<span id="projectnumber">&#160;1.0.0</span>
+   <div id="projectname">User IO<span id="projectnumber">&#160;v1.0.0</span>
    </div>
   </td>
  </tr>
@@ -95,153 +95,14 @@ $(function(){initNavTree('user__io__driver_8c.html','',''); });
 <p>Driver-layer for buttons and LEDs.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="user__io__driver_8h_source.html">user_io_driver.h</a>&quot;</code><br />
-</div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a723c21708d9c1e5786333e03bff8f0fa" id="r_a723c21708d9c1e5786333e03bff8f0fa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a723c21708d9c1e5786333e03bff8f0fa">btn_pins_init</a> (void)</td></tr>
-<tr class="memdesc:a723c21708d9c1e5786333e03bff8f0fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inits all button-pins and applies internal pull-up.  <br /></td></tr>
-<tr class="memitem:a0a587ae73448b0da43ad6db99a04b1cd" id="r_a0a587ae73448b0da43ad6db99a04b1cd"><td class="memItemLeft" align="right" valign="top"><a id="a0a587ae73448b0da43ad6db99a04b1cd" name="a0a587ae73448b0da43ad6db99a04b1cd"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>led_pins_init</b> (void)</td></tr>
-<tr class="memdesc:a0a587ae73448b0da43ad6db99a04b1cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inits all LED-pins and turns them off. <br /></td></tr>
-<tr class="memitem:aa0f1e97f8d35497980e63b74626b103e" id="r_aa0f1e97f8d35497980e63b74626b103e"><td class="memItemLeft" align="right" valign="top">enum btn_state&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa0f1e97f8d35497980e63b74626b103e">btn_get_state</a> (enum btn_id id)</td></tr>
-<tr class="memdesc:aa0f1e97f8d35497980e63b74626b103e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns state of specific button.  <br /></td></tr>
-<tr class="memitem:ab8b03dcd30b91ea8a0400301b7486d7f" id="r_ab8b03dcd30b91ea8a0400301b7486d7f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab8b03dcd30b91ea8a0400301b7486d7f">led_driver_on</a> (enum led_id id)</td></tr>
-<tr class="memdesc:ab8b03dcd30b91ea8a0400301b7486d7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turns on specific LED.  <br /></td></tr>
-<tr class="memitem:ad0459b3e3eec104390a0f668c3aa9372" id="r_ad0459b3e3eec104390a0f668c3aa9372"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad0459b3e3eec104390a0f668c3aa9372">led_driver_off</a> (enum led_id id)</td></tr>
-<tr class="memdesc:ad0459b3e3eec104390a0f668c3aa9372"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turns off specific LED.  <br /></td></tr>
-<tr class="memitem:a9e82829d6c99cf7d0f61fe3fb40f5e2c" id="r_a9e82829d6c99cf7d0f61fe3fb40f5e2c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9e82829d6c99cf7d0f61fe3fb40f5e2c">led_driver_toggle</a> (enum led_id id)</td></tr>
-<tr class="memdesc:a9e82829d6c99cf7d0f61fe3fb40f5e2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Toggles specific LED.  <br /></td></tr>
-</table>
-<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+</div><a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Driver-layer for buttons and LEDs. </p>
 <dl class="section version"><dt>Version</dt><dd>1.0.0</dd></dl>
 <hr  />
 <dl class="section author"><dt>Author</dt><dd><a href="https://github.com/AJ747">https://github.com/AJ747</a> </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>Jul 12, 2025</dd></dl>
 <hr  />
-</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="aa0f1e97f8d35497980e63b74626b103e" name="aa0f1e97f8d35497980e63b74626b103e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa0f1e97f8d35497980e63b74626b103e">&#9670;&#160;</a></span>btn_get_state()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum btn_state btn_get_state </td>
-          <td>(</td>
-          <td class="paramtype">enum btn_id</td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Returns state of specific button. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">id</td><td>(enum btn_id) button to read from </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>(enum btn_state) depressed (0) or pressed (1) </dd></dl>
-
-</div>
-</div>
-<a id="a723c21708d9c1e5786333e03bff8f0fa" name="a723c21708d9c1e5786333e03bff8f0fa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a723c21708d9c1e5786333e03bff8f0fa">&#9670;&#160;</a></span>btn_pins_init()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void btn_pins_init </td>
-          <td>(</td>
-          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Inits all button-pins and applies internal pull-up. </p>
-<dl class="section note"><dt>Note</dt><dd>Internal pull-up used, active low // &lt;&ndash; EDIT HERE </dd></dl>
-
-</div>
-</div>
-<a id="ad0459b3e3eec104390a0f668c3aa9372" name="ad0459b3e3eec104390a0f668c3aa9372"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad0459b3e3eec104390a0f668c3aa9372">&#9670;&#160;</a></span>led_driver_off()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void led_driver_off </td>
-          <td>(</td>
-          <td class="paramtype">enum led_id</td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Turns off specific LED. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">id</td><td>(enum led_id) LED to turn off </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="ab8b03dcd30b91ea8a0400301b7486d7f" name="ab8b03dcd30b91ea8a0400301b7486d7f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab8b03dcd30b91ea8a0400301b7486d7f">&#9670;&#160;</a></span>led_driver_on()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void led_driver_on </td>
-          <td>(</td>
-          <td class="paramtype">enum led_id</td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Turns on specific LED. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">id</td><td>(enum led_id) </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a9e82829d6c99cf7d0f61fe3fb40f5e2c" name="a9e82829d6c99cf7d0f61fe3fb40f5e2c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9e82829d6c99cf7d0f61fe3fb40f5e2c">&#9670;&#160;</a></span>led_driver_toggle()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void led_driver_toggle </td>
-          <td>(</td>
-          <td class="paramtype">enum led_id</td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Toggles specific LED. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">id</td><td>(enum led_id) LED to toggle </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-</div><!-- contents -->
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>

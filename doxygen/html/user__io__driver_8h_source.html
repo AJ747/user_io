@@ -26,7 +26,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">User IO<span id="projectnumber">&#160;1.0.0</span>
+   <div id="projectname">User IO<span id="projectnumber">&#160;v1.0.0</span>
    </div>
   </td>
  </tr>
@@ -101,8 +101,8 @@ $(function(){initNavTree('user__io__driver_8h_source.html','',''); });
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">//---------------------------//</span></div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">// Include begin</span></div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">//---------------------------//</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#include &quot;stdint.h&quot;</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &quot;stdbool.h&quot;</span></div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &quot;<a class="code" href="user__io__config_8h.html">user_io_config.h</a>&quot;</span></div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">//---------------------------//</span></div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">// Include end</span></div>
@@ -113,29 +113,27 @@ $(function(){initNavTree('user__io__driver_8h_source.html','',''); });
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">//---------------------------//</span></div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">// Prototypes begin</span></div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">//---------------------------//</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">// BTNS</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="keywordtype">void</span> <a class="code hl_function" href="user__io__driver_8h.html#a723c21708d9c1e5786333e03bff8f0fa">btn_pins_init</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="keyword">enum</span> btn_state <a class="code hl_function" href="user__io__driver_8h.html#aa0f1e97f8d35497980e63b74626b103e">btn_get_state</a>(<span class="keyword">enum</span> btn_id <span class="keywordtype">id</span>);</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">// LEDS</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="keywordtype">void</span> <a class="code hl_function" href="user__io__driver_8h.html#a0a587ae73448b0da43ad6db99a04b1cd">led_pins_init</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="keywordtype">void</span> <a class="code hl_function" href="user__io__driver_8h.html#ab8b03dcd30b91ea8a0400301b7486d7f">led_driver_on</a>(<span class="keyword">enum</span> led_id <span class="keywordtype">id</span>);</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="keywordtype">void</span> <a class="code hl_function" href="user__io__driver_8h.html#ad0459b3e3eec104390a0f668c3aa9372">led_driver_off</a>(<span class="keyword">enum</span> led_id <span class="keywordtype">id</span>);</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="keywordtype">void</span> <a class="code hl_function" href="user__io__driver_8h.html#a9e82829d6c99cf7d0f61fe3fb40f5e2c">led_driver_toggle</a>(<span class="keyword">enum</span> led_id <span class="keywordtype">id</span>);</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">//---------------------------//</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">// Prototypes end</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">//---------------------------//</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">#endif </span><span class="comment">/* USER_IO_INC_USER_IO_DRIVER_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#ifdef BTNS_USE</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="keywordtype">void</span> btn_pins_init(<span class="keywordtype">void</span>);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="keyword">enum</span> btn_state btn_get_state(<span class="keyword">enum</span> btn_id <span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">#ifdef LEDS_USE</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="keywordtype">void</span> led_pins_init(<span class="keywordtype">void</span>);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="keywordtype">void</span> led_driver_on(<span class="keyword">enum</span> led_id <span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="keywordtype">void</span> led_driver_off(<span class="keyword">enum</span> led_id <span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="keywordtype">void</span> led_driver_toggle(<span class="keyword">enum</span> led_id <span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">//---------------------------//</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">// Prototypes end</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">//---------------------------//</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="preprocessor">#endif </span><span class="comment">/* USER_IO_INC_USER_IO_DRIVER_H_ */</span><span class="preprocessor"></span></div>
 <div class="ttc" id="auser__io__config_8h_html"><div class="ttname"><a href="user__io__config_8h.html">user_io_config.h</a></div><div class="ttdoc">Definitions for user_io library.</div></div>
-<div class="ttc" id="auser__io__driver_8h_html_a0a587ae73448b0da43ad6db99a04b1cd"><div class="ttname"><a href="user__io__driver_8h.html#a0a587ae73448b0da43ad6db99a04b1cd">led_pins_init</a></div><div class="ttdeci">void led_pins_init(void)</div><div class="ttdoc">Inits all LED-pins and turns them off.</div><div class="ttdef"><b>Definition</b> user_io_driver.c:48</div></div>
-<div class="ttc" id="auser__io__driver_8h_html_a723c21708d9c1e5786333e03bff8f0fa"><div class="ttname"><a href="user__io__driver_8h.html#a723c21708d9c1e5786333e03bff8f0fa">btn_pins_init</a></div><div class="ttdeci">void btn_pins_init(void)</div><div class="ttdoc">Inits all button-pins and applies internal pull-up.</div><div class="ttdef"><b>Definition</b> user_io_driver.c:35</div></div>
-<div class="ttc" id="auser__io__driver_8h_html_a9e82829d6c99cf7d0f61fe3fb40f5e2c"><div class="ttname"><a href="user__io__driver_8h.html#a9e82829d6c99cf7d0f61fe3fb40f5e2c">led_driver_toggle</a></div><div class="ttdeci">void led_driver_toggle(enum led_id id)</div><div class="ttdoc">Toggles specific LED.</div><div class="ttdef"><b>Definition</b> user_io_driver.c:139</div></div>
-<div class="ttc" id="auser__io__driver_8h_html_aa0f1e97f8d35497980e63b74626b103e"><div class="ttname"><a href="user__io__driver_8h.html#aa0f1e97f8d35497980e63b74626b103e">btn_get_state</a></div><div class="ttdeci">enum btn_state btn_get_state(enum btn_id id)</div><div class="ttdoc">Returns state of specific button.</div><div class="ttdef"><b>Definition</b> user_io_driver.c:67</div></div>
-<div class="ttc" id="auser__io__driver_8h_html_ab8b03dcd30b91ea8a0400301b7486d7f"><div class="ttname"><a href="user__io__driver_8h.html#ab8b03dcd30b91ea8a0400301b7486d7f">led_driver_on</a></div><div class="ttdeci">void led_driver_on(enum led_id id)</div><div class="ttdoc">Turns on specific LED.</div><div class="ttdef"><b>Definition</b> user_io_driver.c:91</div></div>
-<div class="ttc" id="auser__io__driver_8h_html_ad0459b3e3eec104390a0f668c3aa9372"><div class="ttname"><a href="user__io__driver_8h.html#ad0459b3e3eec104390a0f668c3aa9372">led_driver_off</a></div><div class="ttdeci">void led_driver_off(enum led_id id)</div><div class="ttdoc">Turns off specific LED.</div><div class="ttdef"><b>Definition</b> user_io_driver.c:115</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

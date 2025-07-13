@@ -1,11 +1,25 @@
 var searchData=
 [
-  ['user_5fio_2ec_0',['user_io.c',['../user__io_8c.html',1,'']]],
-  ['user_5fio_2eh_1',['user_io.h',['../user__io_8h.html',1,'']]],
-  ['user_5fio_5fconfig_2eh_2',['user_io_config.h',['../user__io__config_8h.html',1,'']]],
-  ['user_5fio_5fdriver_2ec_3',['user_io_driver.c',['../user__io__driver_8c.html',1,'']]],
-  ['user_5fio_5fdriver_2eh_4',['user_io_driver.h',['../user__io__driver_8h.html',1,'']]],
-  ['user_5fio_5fhandler_5fperiod_5fms_5',['USER_IO_HANDLER_PERIOD_MS',['../user__io__config_8h.html#a9f531730eff9baa790fdbcd7c469e59c',1,'user_io_config.h']]],
-  ['user_5fio_5finit_6',['user_io_init',['../user__io_8h.html#a32af9fef60e37e37c2e7389f58b245e4',1,'user_io_init(void):&#160;user_io.c'],['../user__io_8c.html#a32af9fef60e37e37c2e7389f58b245e4',1,'user_io_init(void):&#160;user_io.c']]],
-  ['user_5fio_5firq_5fhandler_7',['user_io_irq_handler',['../user__io_8h.html#a3e293048c2d3fa327c3c12ca25d7f712',1,'user_io_irq_handler(void):&#160;user_io.c'],['../user__io_8c.html#a3e293048c2d3fa327c3c12ca25d7f712',1,'user_io_irq_handler(void):&#160;user_io.c']]]
+  ['led_0',['led',['../structled.html',1,'']]],
+  ['led_5fall_5fblink_5finfinite_1',['led_all_blink_infinite',['../user__io_8h.html#a8605f4dd965cfa0dd59cae12e55c7df9',1,'led_all_blink_infinite(uint16_t blink_rate_ms):&#160;user_io.c'],['../user__io_8c.html#a8605f4dd965cfa0dd59cae12e55c7df9',1,'led_all_blink_infinite(uint16_t blink_rate_ms):&#160;user_io.c']]],
+  ['led_5fall_5fblink_5fms_2',['led_all_blink_ms',['../user__io_8h.html#afd5a9b47453ba148845b8568421b292b',1,'led_all_blink_ms(uint16_t blink_rate_ms, uint16_t duration_ms):&#160;user_io.c'],['../user__io_8c.html#afd5a9b47453ba148845b8568421b292b',1,'led_all_blink_ms(uint16_t blink_rate_ms, uint16_t duration_ms):&#160;user_io.c']]],
+  ['led_5fall_5fblink_5fn_5ftimes_3',['led_all_blink_n_times',['../user__io_8h.html#a9c1dd4d0289cfb66f528d55f9f34da11',1,'led_all_blink_n_times(uint16_t blink_rate_ms, uint16_t n):&#160;user_io.c'],['../user__io_8c.html#a9c1dd4d0289cfb66f528d55f9f34da11',1,'led_all_blink_n_times(uint16_t blink_rate_ms, uint16_t n):&#160;user_io.c']]],
+  ['led_5fall_5fforce_5foff_4',['led_all_force_off',['../user__io_8h.html#a2f0ca4cfc0694f26c9755c8fc7274e3f',1,'led_all_force_off(void):&#160;user_io.c'],['../user__io_8c.html#a2f0ca4cfc0694f26c9755c8fc7274e3f',1,'led_all_force_off(void):&#160;user_io.c']]],
+  ['led_5fall_5foff_5',['led_all_off',['../user__io_8h.html#a13894e5d4849ec5d558045f876f6663d',1,'led_all_off(void):&#160;user_io.c'],['../user__io_8c.html#a13894e5d4849ec5d558045f876f6663d',1,'led_all_off(void):&#160;user_io.c']]],
+  ['led_5fall_5fon_6',['led_all_on',['../user__io_8h.html#a3575dc51fd455d96f33ac181265d59d3',1,'led_all_on(void):&#160;user_io.c'],['../user__io_8c.html#a3575dc51fd455d96f33ac181265d59d3',1,'led_all_on(void):&#160;user_io.c']]],
+  ['led_5fall_5fpulse_7',['led_all_pulse',['../user__io_8h.html#aadbb2ca419ba72ce5966da2764b9901d',1,'led_all_pulse(uint16_t pulse_duration_ms):&#160;user_io.c'],['../user__io_8c.html#aadbb2ca419ba72ce5966da2764b9901d',1,'led_all_pulse(uint16_t pulse_duration_ms):&#160;user_io.c']]],
+  ['led_5fblink_5finfinite_8',['led_blink_infinite',['../user__io_8h.html#a357c7e1887905dea562fee3410ee29c7',1,'led_blink_infinite(enum led_id id, uint16_t blink_rate_ms):&#160;user_io.c'],['../user__io_8c.html#a357c7e1887905dea562fee3410ee29c7',1,'led_blink_infinite(enum led_id id, uint16_t blink_rate_ms):&#160;user_io.c']]],
+  ['led_5fblink_5fms_9',['led_blink_ms',['../user__io_8h.html#aa93324948cb78ba1cd58316d00e1ab4e',1,'led_blink_ms(enum led_id id, uint16_t blink_rate_ms, uint16_t duration_ms):&#160;user_io.c'],['../user__io_8c.html#aa93324948cb78ba1cd58316d00e1ab4e',1,'led_blink_ms(enum led_id id, uint16_t blink_rate_ms, uint16_t duration_ms):&#160;user_io.c']]],
+  ['led_5fblink_5fn_5ftimes_10',['led_blink_n_times',['../user__io_8h.html#a7a202f46ffd9fc7a06e3e12527cc7284',1,'led_blink_n_times(enum led_id id, uint16_t blink_rate_ms, uint16_t n):&#160;user_io.c'],['../user__io_8c.html#a7a202f46ffd9fc7a06e3e12527cc7284',1,'led_blink_n_times(enum led_id id, uint16_t blink_rate_ms, uint16_t n):&#160;user_io.c']]],
+  ['led_5fforce_5foff_11',['led_force_off',['../user__io_8h.html#a242065a523f21e511d17f46641fdeb6a',1,'led_force_off(enum led_id id):&#160;user_io.c'],['../user__io_8c.html#a242065a523f21e511d17f46641fdeb6a',1,'led_force_off(enum led_id id):&#160;user_io.c']]],
+  ['led_5fhandle_5feffect_5fblink_5fms_12',['led_handle_effect_blink_ms',['../user__io_8c.html#a435b316b5450154ec4ab75367be3bbf7',1,'user_io.c']]],
+  ['led_5fhandle_5feffect_5fblink_5fn_5ftimes_13',['led_handle_effect_blink_n_times',['../user__io_8c.html#a568c1cef1e7950845804bb704888f73f',1,'user_io.c']]],
+  ['led_5fhandle_5feffect_5foff_14',['led_handle_effect_off',['../user__io_8c.html#a92c6de911b3c394ff1b58b1c66553686',1,'user_io.c']]],
+  ['led_5fhandle_5feffect_5fon_15',['led_handle_effect_on',['../user__io_8c.html#a71c1c3b6d9607205154e0aad5eb41322',1,'user_io.c']]],
+  ['led_5fhandle_5feffect_5fpulse_16',['led_handle_effect_pulse',['../user__io_8c.html#aeefc6cec325e8c85f8017bb01eb35cd2',1,'user_io.c']]],
+  ['led_5foff_17',['led_off',['../user__io_8h.html#acedff02a9213dc021881eace8c9fd9a5',1,'led_off(enum led_id id):&#160;user_io.c'],['../user__io_8c.html#acedff02a9213dc021881eace8c9fd9a5',1,'led_off(enum led_id id):&#160;user_io.c']]],
+  ['led_5fon_18',['led_on',['../user__io_8h.html#a0ac49d6c2241ae2f40bd9ca7f8a86107',1,'led_on(enum led_id id):&#160;user_io.c'],['../user__io_8c.html#a0ac49d6c2241ae2f40bd9ca7f8a86107',1,'led_on(enum led_id id):&#160;user_io.c']]],
+  ['led_5fpulse_19',['led_pulse',['../user__io_8h.html#a0dc588bfa628ad64f7b342ac120cab07',1,'led_pulse(enum led_id id, uint16_t pulse_duration_ms):&#160;user_io.c'],['../user__io_8c.html#a0dc588bfa628ad64f7b342ac120cab07',1,'led_pulse(enum led_id id, uint16_t pulse_duration_ms):&#160;user_io.c']]],
+  ['leds_5fhandle_5feffects_20',['leds_handle_effects',['../user__io_8c.html#a3651cda7d61319a8f72e1df63da98150',1,'user_io.c']]],
+  ['leds_5finit_21',['leds_init',['../user__io_8c.html#a0892e076b365fc49b55bd0f90ab09222',1,'user_io.c']]]
 ];

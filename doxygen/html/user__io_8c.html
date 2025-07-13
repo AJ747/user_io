@@ -26,7 +26,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">User IO<span id="projectnumber">&#160;1.0.0</span>
+   <div id="projectname">User IO<span id="projectnumber">&#160;v1.0.0</span>
    </div>
   </td>
  </tr>
@@ -105,9 +105,7 @@ Data Structures</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a3f5bc291abef3fdd695bc8c640584358" id="r_a3f5bc291abef3fdd695bc8c640584358"><td class="memItemLeft" align="right" valign="top"><a id="a3f5bc291abef3fdd695bc8c640584358" name="a3f5bc291abef3fdd695bc8c640584358"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>BTN_DEBOUNCE_TRESHOLD</b>&#160;&#160;&#160;(BTN_DEBOUNCE_TRESHOLD_MS / <a class="el" href="user__io__config_8h.html#a9f531730eff9baa790fdbcd7c469e59c">USER_IO_HANDLER_PERIOD_MS</a>)</td></tr>
-<tr class="memitem:a4e642b68a138704662ae94b18a8e4cae" id="r_a4e642b68a138704662ae94b18a8e4cae"><td class="memItemLeft" align="right" valign="top"><a id="a4e642b68a138704662ae94b18a8e4cae" name="a4e642b68a138704662ae94b18a8e4cae"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>BTN_HOLD_TRESHOLD</b>&#160;&#160;&#160;(BTN_HOLD_TRESHOLD_MS / <a class="el" href="user__io__config_8h.html#a9f531730eff9baa790fdbcd7c469e59c">USER_IO_HANDLER_PERIOD_MS</a>)</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>BTN_DEBOUNCE_TRESHOLD</b>&#160;&#160;&#160;(BTN_DEBOUNCE_TRESHOLD_MS / USER_IO_HANDLER_PERIOD_MS)</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -124,13 +122,45 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:ad4227c0dcceb1ee30ea7eb32648495af" id="r_ad4227c0dcceb1ee30ea7eb32648495af"><td class="memItemLeft" align="right" valign="top"><a id="ad4227c0dcceb1ee30ea7eb32648495af" name="ad4227c0dcceb1ee30ea7eb32648495af"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>btns_init</b> (void)</td></tr>
+<tr class="memdesc:ad4227c0dcceb1ee30ea7eb32648495af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inits all buttons with default params. <br /></td></tr>
+<tr class="memitem:a24e8491ccd83d15226dd4ab4adce9da6" id="r_a24e8491ccd83d15226dd4ab4adce9da6"><td class="memItemLeft" align="right" valign="top"><a id="a24e8491ccd83d15226dd4ab4adce9da6" name="a24e8491ccd83d15226dd4ab4adce9da6"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>btns_handle_states</b> (void)</td></tr>
+<tr class="memdesc:a24e8491ccd83d15226dd4ab4adce9da6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update btn states, check for click or hold etc. <br /></td></tr>
+<tr class="memitem:aaf9a9565f35ae7e20ba80030e23743fb" id="r_aaf9a9565f35ae7e20ba80030e23743fb"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaf9a9565f35ae7e20ba80030e23743fb">btn_debounce</a> (enum btn_id id)</td></tr>
+<tr class="memdesc:aaf9a9565f35ae7e20ba80030e23743fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Debounces specific button.  <br /></td></tr>
+<tr class="memitem:a0892e076b365fc49b55bd0f90ab09222" id="r_a0892e076b365fc49b55bd0f90ab09222"><td class="memItemLeft" align="right" valign="top"><a id="a0892e076b365fc49b55bd0f90ab09222" name="a0892e076b365fc49b55bd0f90ab09222"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>leds_init</b> (void)</td></tr>
+<tr class="memdesc:a0892e076b365fc49b55bd0f90ab09222"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inits all LEDs with default params. <br /></td></tr>
+<tr class="memitem:a3651cda7d61319a8f72e1df63da98150" id="r_a3651cda7d61319a8f72e1df63da98150"><td class="memItemLeft" align="right" valign="top"><a id="a3651cda7d61319a8f72e1df63da98150" name="a3651cda7d61319a8f72e1df63da98150"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>leds_handle_effects</b> (void)</td></tr>
+<tr class="memdesc:a3651cda7d61319a8f72e1df63da98150"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply effects and animate them for all LEDs. <br /></td></tr>
+<tr class="memitem:a011bf7de5cc49ae78dafdcb9df95a0b0" id="r_a011bf7de5cc49ae78dafdcb9df95a0b0"><td class="memItemLeft" align="right" valign="top"><a id="a011bf7de5cc49ae78dafdcb9df95a0b0" name="a011bf7de5cc49ae78dafdcb9df95a0b0"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>led_handle_effect_blink_infinite</b> (enum led_id id)</td></tr>
+<tr class="memitem:a435b316b5450154ec4ab75367be3bbf7" id="r_a435b316b5450154ec4ab75367be3bbf7"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a435b316b5450154ec4ab75367be3bbf7">led_handle_effect_blink_ms</a> (enum led_id id)</td></tr>
+<tr class="memdesc:a435b316b5450154ec4ab75367be3bbf7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles blink ms effect.  <br /></td></tr>
+<tr class="memitem:a568c1cef1e7950845804bb704888f73f" id="r_a568c1cef1e7950845804bb704888f73f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a568c1cef1e7950845804bb704888f73f">led_handle_effect_blink_n_times</a> (enum led_id id)</td></tr>
+<tr class="memdesc:a568c1cef1e7950845804bb704888f73f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles blink n times effect.  <br /></td></tr>
+<tr class="memitem:a92c6de911b3c394ff1b58b1c66553686" id="r_a92c6de911b3c394ff1b58b1c66553686"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a92c6de911b3c394ff1b58b1c66553686">led_handle_effect_off</a> (enum led_id id)</td></tr>
+<tr class="memdesc:a92c6de911b3c394ff1b58b1c66553686"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles off effect.  <br /></td></tr>
+<tr class="memitem:aeefc6cec325e8c85f8017bb01eb35cd2" id="r_aeefc6cec325e8c85f8017bb01eb35cd2"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeefc6cec325e8c85f8017bb01eb35cd2">led_handle_effect_pulse</a> (enum led_id id)</td></tr>
+<tr class="memdesc:aeefc6cec325e8c85f8017bb01eb35cd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles pulse effect.  <br /></td></tr>
+<tr class="memitem:a71c1c3b6d9607205154e0aad5eb41322" id="r_a71c1c3b6d9607205154e0aad5eb41322"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a71c1c3b6d9607205154e0aad5eb41322">led_handle_effect_on</a> (enum led_id id)</td></tr>
+<tr class="memdesc:a71c1c3b6d9607205154e0aad5eb41322"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles on effect.  <br /></td></tr>
+<tr class="memitem:af708e9d8a8a2daf0a881c4b62695de9e" id="r_af708e9d8a8a2daf0a881c4b62695de9e"><td class="memItemLeft" align="right" valign="top"><a id="af708e9d8a8a2daf0a881c4b62695de9e" name="af708e9d8a8a2daf0a881c4b62695de9e"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>intervals_init</b> (void)</td></tr>
+<tr class="memdesc:af708e9d8a8a2daf0a881c4b62695de9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inits interval counters. <br /></td></tr>
+<tr class="memitem:a0751e5582b6e25adf7a61fdd108e8ae8" id="r_a0751e5582b6e25adf7a61fdd108e8ae8"><td class="memItemLeft" align="right" valign="top"><a id="a0751e5582b6e25adf7a61fdd108e8ae8" name="a0751e5582b6e25adf7a61fdd108e8ae8"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>intervals_update</b> (void)</td></tr>
+<tr class="memdesc:a0751e5582b6e25adf7a61fdd108e8ae8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates counters for all intervals. <br /></td></tr>
 <tr class="memitem:a32af9fef60e37e37c2e7389f58b245e4" id="r_a32af9fef60e37e37c2e7389f58b245e4"><td class="memItemLeft" align="right" valign="top"><a id="a32af9fef60e37e37c2e7389f58b245e4" name="a32af9fef60e37e37c2e7389f58b245e4"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>user_io_init</b> (void)</td></tr>
 <tr class="memdesc:a32af9fef60e37e37c2e7389f58b245e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inits used mcu-periphs and framework used. <br /></td></tr>
 <tr class="memitem:a3e293048c2d3fa327c3c12ca25d7f712" id="r_a3e293048c2d3fa327c3c12ca25d7f712"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3e293048c2d3fa327c3c12ca25d7f712">user_io_irq_handler</a> (void)</td></tr>
 <tr class="memdesc:a3e293048c2d3fa327c3c12ca25d7f712"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks and updates states.  <br /></td></tr>
-<tr class="memitem:a14e2f2625c7baf56773cdfa74ae054bf" id="r_a14e2f2625c7baf56773cdfa74ae054bf"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a14e2f2625c7baf56773cdfa74ae054bf">btn_hold</a> (enum btn_id id)</td></tr>
-<tr class="memdesc:a14e2f2625c7baf56773cdfa74ae054bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if button is held down.  <br /></td></tr>
+<tr class="memitem:a8b49c6e1a435368dc3750d5e41b05efd" id="r_a8b49c6e1a435368dc3750d5e41b05efd"><td class="memItemLeft" align="right" valign="top"><a id="a8b49c6e1a435368dc3750d5e41b05efd" name="a8b49c6e1a435368dc3750d5e41b05efd"></a>
+uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>btn_hold_ms</b> (enum btn_id id, uint16_t ms)</td></tr>
 <tr class="memitem:ae84ad78b43cdea503148f8a823882b12" id="r_ae84ad78b43cdea503148f8a823882b12"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae84ad78b43cdea503148f8a823882b12">btn_depressed</a> (enum btn_id id)</td></tr>
 <tr class="memdesc:ae84ad78b43cdea503148f8a823882b12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if button is depressed.  <br /></td></tr>
 <tr class="memitem:a896fe6ce2cb4d3788a472bcfdea417b9" id="r_a896fe6ce2cb4d3788a472bcfdea417b9"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a896fe6ce2cb4d3788a472bcfdea417b9">btn_released</a> (enum btn_id id)</td></tr>
@@ -167,6 +197,17 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>led_all_on</b> (void)
 <tr class="memdesc:afd5a9b47453ba148845b8568421b292b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply finite blinking effect to all LEDs.  <br /></td></tr>
 <tr class="memitem:aadbb2ca419ba72ce5966da2764b9901d" id="r_aadbb2ca419ba72ce5966da2764b9901d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aadbb2ca419ba72ce5966da2764b9901d">led_all_pulse</a> (uint16_t pulse_duration_ms)</td></tr>
 <tr class="memdesc:aadbb2ca419ba72ce5966da2764b9901d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pulse all LEDs.  <br /></td></tr>
+<tr class="memitem:a1069ea42ddc5348f2cff87ddecfdb953" id="r_a1069ea42ddc5348f2cff87ddecfdb953"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1069ea42ddc5348f2cff87ddecfdb953">interval_reached_ms</a> (enum interval_id id, uint32_t ms)</td></tr>
+<tr class="memdesc:a1069ea42ddc5348f2cff87ddecfdb953"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks to see if ms interval is reached since last check.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:aaf50e3e475dc012796f792192dba360a" id="r_aaf50e3e475dc012796f792192dba360a"><td class="memItemLeft" align="right" valign="top"><a id="aaf50e3e475dc012796f792192dba360a" name="aaf50e3e475dc012796f792192dba360a"></a>
+static struct btn&#160;</td><td class="memItemRight" valign="bottom"><b>btn</b> [BTNS_AMOUNT]</td></tr>
+<tr class="memitem:a5a6c2b8573c22812c854d95dde0d31a1" id="r_a5a6c2b8573c22812c854d95dde0d31a1"><td class="memItemLeft" align="right" valign="top"><a id="a5a6c2b8573c22812c854d95dde0d31a1" name="a5a6c2b8573c22812c854d95dde0d31a1"></a>
+static struct led&#160;</td><td class="memItemRight" valign="bottom"><b>led</b> [LEDS_AMOUNT]</td></tr>
+<tr class="memitem:a2425b7bee75bf9a04d8c21d6797ebecc" id="r_a2425b7bee75bf9a04d8c21d6797ebecc"><td class="memItemLeft" align="right" valign="top"><a id="a2425b7bee75bf9a04d8c21d6797ebecc" name="a2425b7bee75bf9a04d8c21d6797ebecc"></a>
+static uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>interval</b> [INTERVALS_AMOUNT] = {0}</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Library for buttons and LEDs. </p>
@@ -202,6 +243,39 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>led_all_on</b> (void)
 
 </div>
 </div>
+<a id="aaf9a9565f35ae7e20ba80030e23743fb" name="aaf9a9565f35ae7e20ba80030e23743fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf9a9565f35ae7e20ba80030e23743fb">&#9670;&#160;</a></span>btn_debounce()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void btn_debounce </td>
+          <td>(</td>
+          <td class="paramtype">enum btn_id</td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Debounces specific button. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>(enum btn_id) button to debounce </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ae84ad78b43cdea503148f8a823882b12" name="ae84ad78b43cdea503148f8a823882b12"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae84ad78b43cdea503148f8a823882b12">&#9670;&#160;</a></span>btn_depressed()</h2>
 
@@ -218,32 +292,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>led_all_on</b> (void)
 </div><div class="memdoc">
 
 <p>Checks if button is depressed. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">id</td><td>(enum btn_id) button to check </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>(uint8_t) true (1) or false (0) </dd></dl>
-
-</div>
-</div>
-<a id="a14e2f2625c7baf56773cdfa74ae054bf" name="a14e2f2625c7baf56773cdfa74ae054bf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a14e2f2625c7baf56773cdfa74ae054bf">&#9670;&#160;</a></span>btn_hold()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint8_t btn_hold </td>
-          <td>(</td>
-          <td class="paramtype">enum btn_id</td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Checks if button is held down. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">id</td><td>(enum btn_id) button to check </td></tr>
@@ -277,6 +325,38 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>led_all_on</b> (void)
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>(uint8_t) true (1) or false (0) </dd></dl>
+
+</div>
+</div>
+<a id="a1069ea42ddc5348f2cff87ddecfdb953" name="a1069ea42ddc5348f2cff87ddecfdb953"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1069ea42ddc5348f2cff87ddecfdb953">&#9670;&#160;</a></span>interval_reached_ms()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t interval_reached_ms </td>
+          <td>(</td>
+          <td class="paramtype">enum interval_id</td>          <td class="paramname"><span class="paramname"><em>id</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>ms</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks to see if ms interval is reached since last check. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>(enum interval_id) interval to check </td></tr>
+    <tr><td class="paramname">ms</td><td>(uint32_t) run at ms interval </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>(uint8_t) true or false</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Can count up to ~49 days, 2^32 ms, before overflow </dd></dl>
 
 </div>
 </div>
@@ -531,6 +611,171 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>led_all_on</b> (void)
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">id</td><td>(enum led_id) LED to turn off </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a435b316b5450154ec4ab75367be3bbf7" name="a435b316b5450154ec4ab75367be3bbf7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a435b316b5450154ec4ab75367be3bbf7">&#9670;&#160;</a></span>led_handle_effect_blink_ms()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void led_handle_effect_blink_ms </td>
+          <td>(</td>
+          <td class="paramtype">enum led_id</td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handles blink ms effect. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>(enum led_id) LED </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a568c1cef1e7950845804bb704888f73f" name="a568c1cef1e7950845804bb704888f73f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a568c1cef1e7950845804bb704888f73f">&#9670;&#160;</a></span>led_handle_effect_blink_n_times()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void led_handle_effect_blink_n_times </td>
+          <td>(</td>
+          <td class="paramtype">enum led_id</td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handles blink n times effect. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>(enum led_id) LED </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a92c6de911b3c394ff1b58b1c66553686" name="a92c6de911b3c394ff1b58b1c66553686"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92c6de911b3c394ff1b58b1c66553686">&#9670;&#160;</a></span>led_handle_effect_off()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void led_handle_effect_off </td>
+          <td>(</td>
+          <td class="paramtype">enum led_id</td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handles off effect. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>(enum led_id) LED </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a71c1c3b6d9607205154e0aad5eb41322" name="a71c1c3b6d9607205154e0aad5eb41322"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71c1c3b6d9607205154e0aad5eb41322">&#9670;&#160;</a></span>led_handle_effect_on()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void led_handle_effect_on </td>
+          <td>(</td>
+          <td class="paramtype">enum led_id</td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handles on effect. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>(enum led_id) LED </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aeefc6cec325e8c85f8017bb01eb35cd2" name="aeefc6cec325e8c85f8017bb01eb35cd2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeefc6cec325e8c85f8017bb01eb35cd2">&#9670;&#160;</a></span>led_handle_effect_pulse()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void led_handle_effect_pulse </td>
+          <td>(</td>
+          <td class="paramtype">enum led_id</td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handles pulse effect. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>(enum led_id) LED </td></tr>
   </table>
   </dd>
 </dl>
