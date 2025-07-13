@@ -40,7 +40,7 @@ void user_io_irq_handler(void);
 
 
 #ifdef BTNS_USE
-uint8_t btn_hold(enum btn_id id);
+uint8_t btn_hold_ms(enum btn_id id, uint16_t ms);
 uint8_t btn_click(enum btn_id id);
 uint8_t btn_released(enum btn_id id);
 uint8_t btn_depressed(enum btn_id id);
