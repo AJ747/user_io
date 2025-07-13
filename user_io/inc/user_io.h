@@ -34,17 +34,21 @@
 //---------------------------//
 // Prototypes begin
 //---------------------------//
-// USER_IO
 void user_io_init(void);
 void user_io_irq_handler(void);
 
-// BTN
+
+
+#ifdef BTNS_USE
 uint8_t btn_hold(enum btn_id id);
 uint8_t btn_click(enum btn_id id);
 uint8_t btn_released(enum btn_id id);
 uint8_t btn_depressed(enum btn_id id);
+#endif
 
-// LED
+
+
+#ifdef LEDS_USE
 void led_blink_infinite(enum led_id id, uint16_t blink_rate_ms);
 void led_blink_ms(enum led_id id, uint16_t blink_rate_ms, uint16_t duration_ms);
 void led_blink_n_times(enum led_id id, uint16_t blink_rate_ms, uint16_t n);
@@ -60,6 +64,13 @@ void led_all_blink_infinite(uint16_t blink_rate_ms);
 void led_all_blink_n_times(uint16_t blink_rate_ms, uint16_t n);
 void led_all_blink_ms(uint16_t blink_rate_ms, uint16_t duration_ms);
 void led_all_pulse(uint16_t pulse_duration_ms);
+#endif
+
+
+
+#ifdef INTERVALS_USE
+uint8_t interval_reached_ms(enum interval_id id, uint32_t ms);
+#endif
 //---------------------------//
 // Prototypes end
 //---------------------------//

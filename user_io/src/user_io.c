@@ -30,9 +30,9 @@
 //---------------------------//
 // Define begin
 //---------------------------//
-// BTN
+#ifdef BTNS_USE
 #define BTN_DEBOUNCE_TRESHOLD (BTN_DEBOUNCE_TRESHOLD_MS / USER_IO_HANDLER_PERIOD_MS)
-#define BTN_HOLD_TRESHOLD (BTN_HOLD_TRESHOLD_MS / USER_IO_HANDLER_PERIOD_MS)
+#endif
 //---------------------------//
 // Define end
 //---------------------------//
@@ -42,6 +42,7 @@
 //---------------------------//
 // Enum begin
 //---------------------------//
+#ifdef LEDS_USE
 enum led_state {
 	OFF = 0,
 	ON,
@@ -50,6 +51,7 @@ enum led_state {
 	BLINK_N_TIMES,
 	PULSE
 };
+#endif
 //---------------------------//
 // Enum end
 //---------------------------//
@@ -59,6 +61,7 @@ enum led_state {
 //---------------------------//
 // Struct begin
 //---------------------------//
+#ifdef BTNS_USE
 struct btn {
 	enum btn_id id;
 	enum btn_state curr_state;
@@ -66,11 +69,14 @@ struct btn {
 	uint8_t debounce_counter;
 	uint8_t press_counter;
 	uint8_t click;
-	uint8_t hold_counter;
-	uint8_t hold;
 	uint8_t released;
+	uint16_t hold_duration;
 };
+#endif
 
+
+
+#ifdef LEDS_USE
 struct led {
 	enum led_id id;
 	enum led_state set_state;
@@ -80,6 +86,7 @@ struct led {
 	int16_t blink_duration;
 	int16_t pulse_duration;
 };
+#endif
 //---------------------------//
 // Struct end
 //---------------------------//
@@ -89,12 +96,15 @@ struct led {
 //---------------------------//
 // Prototypes begin
 //---------------------------//
-// BTNS
+#ifdef BTNS_USE
 static void btns_init(void);
 static void btns_handle_states(void);
 static void btn_debounce(enum btn_id id);
+#endif
 
-// LEDS
+
+
+#ifdef LEDS_USE
 static void leds_init(void);
 static void leds_handle_effects(void);
 static void led_handle_effect_blink_infinite(enum led_id id);
@@ -103,6 +113,14 @@ static void led_handle_effect_blink_n_times(enum led_id id);
 static void led_handle_effect_off(enum led_id id);
 static void led_handle_effect_pulse(enum led_id id);
 static void led_handle_effect_on(enum led_id id);
+#endif
+
+
+
+#ifdef INTERVALS_USE
+static void intervals_init(void);
+static void intervals_update(void);
+#endif
 //---------------------------//
 // Prototypes end
 //---------------------------//
@@ -116,8 +134,23 @@ static void led_handle_effect_on(enum led_id id);
 volatile uint8_t user_io_handle_rdy = 0;
 #endif
 
+
+
+#ifdef BTNS_USE
 static struct btn btn[BTNS_AMOUNT];
+#endif
+
+
+
+#ifdef LEDS_USE
 static struct led led[LEDS_AMOUNT];
+#endif
+
+
+
+#ifdef INTERVALS_USE
+static uint32_t interval[INTERVALS_AMOUNT] = {0};
+#endif
 //---------------------------//
 // Variable end
 //---------------------------//
@@ -130,13 +163,23 @@ static struct led led[LEDS_AMOUNT];
  * 
  */
 void user_io_init(void) {
-	// BTNS
+#ifdef BTNS_USE
 	btn_pins_init();
 	btns_init();
+#endif
 	
-	// LEDS
+
+
+#ifdef LEDS_USE
 	led_pins_init();
 	leds_init();
+#endif
+
+
+	
+#ifdef INTERVALS_USE
+	intervals_init();
+#endif
 }
 
 
@@ -148,21 +191,37 @@ void user_io_init(void) {
  * @note Must be called with fixed interval 
  */
 void user_io_irq_handler(void) {
-	leds_handle_effects();
+#ifdef BTNS_USE
 	btns_handle_states();
+#endif
+
+
+
+#ifdef LEDS_USE
+	leds_handle_effects();
+#endif
+
+
+	
+#ifdef INTERVALS_USE
+	intervals_update();
+#endif
 }
 
 
 
+#ifdef BTNS_USE
 /**
  * @fn uint8_t btn_hold(enum btn_id)
- * @brief Checks if button is held down
+ * @brief Checks if button is held down more than threshold in milliseconds
  * 
  * @param id (enum btn_id) button to check
- * @return (uint8_t) true (1) or false (0)
+ * @return (uint8_t) true or false
+ * 
+ * @note Always check for the longest hold duration first to avoid missing longer hold events.
  */
-uint8_t btn_hold(enum btn_id id) {
-	return btn[id].hold;
+uint8_t btn_hold_ms(enum btn_id id, uint16_t ms) {
+	return (btn[id].hold_duration >= ms)? true : false;
 }
 
 
@@ -175,7 +234,7 @@ uint8_t btn_hold(enum btn_id id) {
  * @return (uint8_t) true (1) or false (0)
  */
 uint8_t btn_depressed(enum btn_id id) {
-	return !btn[id].hold;
+	return !btn[id].hold_duration;
 }
 
 
@@ -216,6 +275,87 @@ uint8_t btn_click(enum btn_id id) {
 
 
 
+/**
+ * @fn void btns_init(void)
+ * @brief Inits all buttons with default params
+ * 
+ */
+static void btns_init(void) {
+	for (uint8_t id = 0; id < BTNS_AMOUNT; id++) {
+		btn[id].id = id;
+		btn[id].curr_state = depressed;
+		btn[id].last_state = depressed;
+		btn[id].debounce_counter = 0;
+		btn[id].press_counter = 0;
+		btn[id].click = false;		
+		btn[id].hold_duration = 0;
+		btn[id].released = false;
+	}
+}
+
+
+
+/**
+ * @fn void btns_handle_states(void)
+ * @brief Update btn states, check for click or hold etc
+ * 
+ */
+static void btns_handle_states(void) {
+	for (uint8_t id = 0; id < BTNS_AMOUNT; id++) {
+		btn_debounce(id);
+		
+		// Check for click
+		if ((btn[id].curr_state == pressed) && (btn[id].last_state == depressed)) {
+			btn[id].click = true;
+			
+		// Check for hold 
+		} else if ((btn[id].curr_state == pressed) && (btn[id].last_state == pressed)) {
+			btn[id].hold_duration += USER_IO_HANDLER_PERIOD_MS;		
+			
+		// Check for release
+		} else if ((btn[id].curr_state == depressed) && (btn[id].last_state == pressed)) {
+			btn[id].released = true;
+			btn[id].hold_duration = 0;
+		}
+		
+		btn[id].last_state = btn[id].curr_state;
+	}
+}
+
+
+
+/**
+ * @fn void btn_debounce(enum btn_id)
+ * @brief Debounces specific button
+ * 
+ * @param id (enum btn_id) button to debounce
+ */
+static void btn_debounce(enum btn_id id) {
+	btn[id].press_counter += (uint8_t) btn_get_state(id);
+			
+	// Debounce btn
+	if (btn[id].debounce_counter >= BTN_DEBOUNCE_TRESHOLD) {
+		
+		// Register as press
+		if (btn[id].press_counter > 0) {
+			btn[id].curr_state = pressed;
+			btn[id].press_counter = 0;
+			
+		// Register as depressed, reset state
+		} else {
+			btn[id].curr_state = depressed;
+		}
+		
+		btn[id].debounce_counter = 0;
+	} else {
+		btn[id].debounce_counter++;
+	}
+}
+#endif
+
+
+
+#ifdef LEDS_USE
 /**
  * @fn void led_blink_infinite(enum led_id, uint16_t)
  * @brief Applies infinite blinking effect to specified LED
@@ -424,92 +564,6 @@ void led_all_pulse(uint16_t pulse_duration_ms) {
 
 
 /**
- * @fn void btns_init(void)
- * @brief Inits all buttons with default params
- * 
- */
-static void btns_init(void) {
-	for (uint8_t id = 0; id < BTNS_AMOUNT; id++) {
-		btn[id].id = id;
-		btn[id].curr_state = depressed;
-		btn[id].last_state = depressed;
-		btn[id].debounce_counter = 0;
-		btn[id].press_counter = 0;
-		btn[id].click = false;		
-		btn[id].hold_counter = 0;
-		btn[id].hold = false;
-		btn[id].released = false;
-	}
-}
-
-
-
-/**
- * @fn void btns_handle_states(void)
- * @brief Update btn states, check for click or hold etc
- * 
- */
-static void btns_handle_states(void) {
-	for (uint8_t id = 0; id < BTNS_AMOUNT; id++) {
-		btn_debounce(id);
-		
-		// Check for click
-		if ((btn[id].curr_state == pressed) && (btn[id].last_state == depressed)) {
-			btn[id].click = true;
-			btn[id].hold_counter++;
-			
-		// Check for hold 
-		} else if ((btn[id].curr_state == pressed) && (btn[id].last_state == pressed)) {
-			btn[id].hold_counter++;
-			
-			if (btn[id].hold_counter >= BTN_HOLD_TRESHOLD) {
-				btn[id].hold = true;
-			}
-			
-		// Check for release
-		} else if ((btn[id].curr_state == depressed) && (btn[id].last_state == pressed)) {
-			btn[id].released = true;
-			btn[id].hold = false;
-			btn[id].hold_counter = 0;
-		}
-		
-		btn[id].last_state = btn[id].curr_state;
-	}
-}
-
-
-
-/**
- * @fn void btn_debounce(enum btn_id)
- * @brief Debounces specific button
- * 
- * @param id (enum btn_id) button to debounce
- */
-static void btn_debounce(enum btn_id id) {
-	btn[id].press_counter += (uint8_t) btn_get_state(id);
-			
-	// Debounce btn
-	if (btn[id].debounce_counter >= BTN_DEBOUNCE_TRESHOLD) {
-		
-		// Register as press
-		if (btn[id].press_counter > 0) {
-			btn[id].curr_state = pressed;
-			btn[id].press_counter = 0;
-			
-		// Register as depressed, reset state
-		} else {
-			btn[id].curr_state = depressed;
-		}
-		
-		btn[id].debounce_counter = 0;
-	} else {
-		btn[id].debounce_counter++;
-	}
-}
-
-
-
-/**
  * @fn void leds_init(void)
  * @brief Inits all LEDs with default params
  * 
@@ -570,7 +624,7 @@ static void leds_handle_effects(void) {
  * @fn void led_effect_blink_infinite(enum led_id)
  * @brief Handles blink infinite effect
  * 
- * @param id (enum btn_id) button to debounce
+ * @param id (enum led_id) LED
  */
 static void led_handle_effect_blink_infinite(enum led_id id) {
 	// Time to toggle
@@ -711,3 +765,51 @@ static void led_handle_effect_on(enum led_id id) {
 		led[id].curr_state = ON;
 	}
 }
+#endif
+
+
+
+#ifdef INTERVALS_USE
+/**
+ * @fn uint8_t interval_reached_ms(enum interval_id, uint32_t)
+ * @brief Checks to see if ms interval is reached since last check
+ * 
+ * @param id (enum interval_id) interval to check
+ * @param ms (uint32_t) run at ms interval
+ * @return (uint8_t) true or false
+ * 
+ * @note Can count up to ~49 days, 2^32 ms, before overflow
+ */
+uint8_t interval_reached_ms(enum interval_id id, uint32_t ms) {
+	if (interval[id] >= ms) {
+		interval[id] = 0;
+		
+		return true;
+	}
+	return false;
+}
+
+
+
+/**
+ * @fn void intervals_init(void)
+ * @brief Inits interval counters
+ */
+static void intervals_init(void) {
+	for (uint8_t id = 0; id < INTERVALS_AMOUNT; id++) {
+		interval[id] = 0;
+	}
+}
+
+
+
+/**
+ * @fn void intervals_update(void)
+ * @brief Updates counters for all intervals
+ */
+static void intervals_update(void) {
+	for (uint8_t id = 0; id < INTERVALS_AMOUNT; id++) {
+		interval[id] += USER_IO_HANDLER_PERIOD_MS;
+	}
+}
+#endif

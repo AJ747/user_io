@@ -1,6 +1,8 @@
 # About User IO - Porting guide below
 
-User IO is a library for reading buttons and controlling LEDs in a non-blocking way for embedded applications written in C. Add up to 256 buttons and LEDs to your project and control them easily using User IO. It needs a timer to trigger its handler every *x* milliseconds to function properly.
+User IO is a library for reading buttons, controlling LEDs and running code with fixed intervals in a non-blocking way for embedded applications written in C. Add up to 256 buttons, LEDs and "intervals" to your project and control them easily using User IO. You can also choose which features you want to use, and which to exclude, see [step 4 - Update macro-parameters](#4-Update-macro-parameters) in the porting guide.
+
+It needs a timer to trigger its handler every *x* milliseconds to function properly.
 
 > **NOTE**
 >
@@ -49,12 +51,40 @@ User IO is a library for reading buttons and controlling LEDs in a non-blocking 
 
 #### Features for button-sensing:
 * Sense click - `btn_click()`
-* Sense hold (custom threshold) - `btn_hold()`
+* Sense hold (custom threshold) - `btn_hold_ms()`
 * Sense release after click/hold - `btn_released()`
 * Sense if depressed - `btn_depressed()`
 * All buttons debounced (custom threshold)
 
----
+----
+
+#### Features for "intervals":
+
+An "interval" enables you to run code at a specific interval in a non-blocking way, an example is shown below:
+
+```C
+int main(void) {
+	// Init
+	system_init();
+
+	while (1) {
+		...
+		
+		// Prints every 1000 ms, 1 sec, in a non-blocking way
+		if (interval_reached_ms(INTERVAL0, 1000)) {
+			printf("Hello, World!");
+		}
+
+		...
+	}
+}
+```
+
+> **IMPORTANT**
+>
+> An "interval" counter can run up to ~49 days, 2^32 ms, before overflowing.
+
+----
 
 # Porting guide
 
@@ -68,7 +98,7 @@ A quick guide on how to properly port the User IO library to any embedded platfo
 
 > **IMPORTANT**
 >
-> Button and LED-states are all updated in the TIMx IRQ handler, this can take some time. Advised to use lowest IRQ priority for TIMx if possible. 
+> Button, LED-states and "intervals" are all updated in the TIMx IRQ handler, this can take some time. Advised to use lowest IRQ priority for TIMx if possible. 
 >
 > See [step 2 - Timer setup (Alternative method)](#2-timer-setup-alternative-method) for an alternative method where we set a simple flag in the TIMx IRQ handler and run the User IO handler in the main-loop.
 >
@@ -96,18 +126,18 @@ int main(void) {
 <br>
 
 #### 2. Timer setup (Normal method)
-Init a timer that calls an interrupt handler every *x* milliseconds. This depends on how responsive you want the buttons and LEDs to be. A minimum of *x* = 10 ms should be more than fast enough.
+Init a timer that calls an interrupt handler every *x* milliseconds. This depends on how responsive you want the buttons, LEDs and "intervals" to be. A minimum of *x* = 10 ms should be more than fast enough. 
 
 Here you must add ```user_io_irq_handler()``` in the interrupt handler. In our case, we are using TIMx with a period of 10 ms.
 
 ```C
 void TIMx_IRQHandler(void) {
 	// TIMx overflow IRQ
-	if (TIMx_OVR) {
+	if (TIMx_OVR()) {
 		user_io_irq_handler();		
 		
 		// Clear flag
-		CLEAR_TIMx_OVR;
+		CLEAR_TIMx_OVR();
 	}
 }
 ```
@@ -119,7 +149,7 @@ void TIMx_IRQHandler(void) {
 <br>
 
 #### 2. Timer setup (Alternative method)
-Init a timer that calls an interrupt handler every *x* milliseconds. This depends on how responsive you want the buttons and LEDs to be. A minimum of *x* = 10 ms should be more than fast enough.
+Init a timer that calls an interrupt handler every *x* milliseconds. This depends on how responsive you want the buttons, LEDs and "intervals" to be. A minimum of *x* = 10 ms should be more than fast enough.
 
 First, go to `user_io_config.h` and uncomment `#define ALTERNATIVE_IRQ_METHOD`.
 
@@ -140,12 +170,12 @@ extern user_io_handle_rdy;
 
 void TIMx_IRQHandler(void) {
 	// TIMx overflow IRQ
-	if (TIMx_OVR) {
+	if (TIMx_OVR()) {
         // Set flag
         user_io_handle_rdy = true;
         
         // Clear flag
-        CLEAR_TIMx_OVR;
+        CLEAR_TIMx_OVR();
 	}
 }
 
@@ -182,26 +212,30 @@ int main(void) {
 
 <br>
 
-#### 3.1 Choose amount of buttons and LEDs
-Choose the amount of buttons and LEDs used by opening `user_io_config.h` and adding these to `enum led_id` and `enum btn_id` as follows:
+#### 3.1 Choose amount of buttons, LEDs and "intervals"
+Choose the amount of buttons and LEDs used by opening `user_io_config.h` and adding these to `enum led_id`, `enum btn_id` and `enum interval_id` as follows:
 
 ```C
 enum btn_id {
 	BTN0 = 0,  	// <-- EDIT HERE
 	BTN1,  		// <-- EDIT HERE
 	BTN2,  		// <-- EDIT HERE
-	BTN3  		// <-- EDIT HERE
 };
 
-// LED
 enum led_id {
 	LED0 = 0,  	// <-- EDIT HERE
 	LED1,  		// <-- EDIT HERE
 	LED2  		// <-- EDIT HERE
 };
+
+enum interval_id {
+	INTERVAL0 = 0,	// <-- EDIT HERE
+	INTERVA1,	// <-- EDIT HERE
+	INTERVA2  	// <-- EDIT HERE
+};
 ```
 
-Here we have 3 buttons and 3 LEDs.
+Here we have 3 buttons, 3 LEDs and 3 "intervals".
 
 <br>
 
@@ -261,8 +295,6 @@ enum btn_state btn_get_state(enum btn_id id) {
 	}
 }
 
-
-
 void led_driver_on(enum led_id id) {
 	switch (id) {
 		case LED0:
@@ -279,8 +311,6 @@ void led_driver_on(enum led_id id) {
 	}
 }
 
-
-
 void led_driver_off(enum led_id id) {
 	switch (id) {
 		case LED0:
@@ -296,8 +326,6 @@ void led_driver_off(enum led_id id) {
 			break;
 	}
 }
-
-
 
 void led_driver_toggle(enum led_id id) {
 	switch (id) {
@@ -325,20 +353,23 @@ If you are using more or less buttons and LEDs than shown here, then you must ad
 Open `user_io_config.h` and find the `#define` section, then alter the following:
 
 ```C
-// Here the IRQ is called every 10 ms
-#define USER_IO_HANDLER_PERIOD_MS TIMx_PERIOD_MS // <-- EDIT HERE
+/// Uncomment if alternative method is used
+//#define ALTERNATIVE_IRQ_METHOD // <-- EDIT HERE
 
-// Amount of buttons used
-#define BTNS_AMOUNT 3 // <-- EDIT HERE
+// Comment if feature is not needed
+#define BTNS_USE // <-- EDIT HERE
+#define LEDS_USE // <-- EDIT HERE
+#define INTERVALS_USE // <-- EDIT HERE
+
+// IRQ handler is called every 10 ms // <-- EDIT HERE
+#define USER_IO_HANDLER_PERIOD_MS TIMx_PERIOD_MS // <-- EDIT HERE
 
 // Button sampling time, alter if faster clicking is required
 #define BTN_DEBOUNCE_TRESHOLD_MS 20 // <-- EDIT HERE
 
-// Time to wait before button press is registered as hold
-#define BTN_HOLD_TRESHOLD_MS 1000 // <-- EDIT HERE
-
-// Amount of LEDs used
-#define LEDS_AMOUNT 3 // <-- EDIT HERE
+#define BTNS_AMOUNT	3 // <-- EDIT HERE
+#define LEDS_AMOUNT	3 // <-- EDIT HERE
+#define INTERVALS_AMOUNT 3 // <-- EDIT HERE
 ```
 
 <br>
@@ -356,8 +387,8 @@ int main(void) {
     user_io_init();
 
     while (1) {
-        // Do different effects if held down
-        if (btn_hold(BTN0)) {
+        // Do different effects if held down more than 1000 ms
+        if (btn_hold_ms(BTN0, 1000)) {
             // Blink, on and off every 100 ms
             led_blink_infinite(LED0, 100);
 
@@ -376,7 +407,22 @@ int main(void) {
         } else {
             led_all_off();
         }
+
+	// Prints every 1000 ms 
+	if (interval_reached_ms(INTERVAL0, 1000)) {
+		printf("Hello, World!");
+	}
     }
+}
+
+void TIMx_IRQHandler(void) {
+	// TIMx overflow IRQ
+	if (TIMx_OVR()) {
+		user_io_irq_handler();		
+		
+		// Clear flag
+		CLEAR_TIMx_OVR();
+	}
 }
 ```
 

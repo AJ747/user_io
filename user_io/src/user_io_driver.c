@@ -26,6 +26,7 @@
 
 
 
+#ifdef BTNS_USE
 /**
  * @fn void btn_pins_init(void)
  * @brief Inits all button-pins and applies internal pull-up
@@ -36,23 +37,6 @@ void btn_pins_init(void) {
 	PIN_CONFIG(BTN0_PIN, INPUT_PULL_UP); 	// <-- EDIT HERE
 	PIN_CONFIG(BTN1_PIN, INPUT_PULL_UP); 	// <-- EDIT HERE
 	PIN_CONFIG(BTN2_PIN, INPUT_PULL_UP); 	// <-- EDIT HERE
-}
-
-
-
-/**
- * @fn void led_pins_init(void)
- * @brief Inits all LED-pins and turns them off
- * 
- */
-void led_pins_init(void) {
-	PIN_CONFIG(LED0_PIN, OUTPUT); 	// <-- EDIT HERE
-	PIN_CONFIG(LED1_PIN, OUTPUT); 	// <-- EDIT HERE
-	PIN_CONFIG(LED2_PIN, OUTPUT); 	// <-- EDIT HERE
-
-	PIN_LOW(LED0_PIN);				// <-- EDIT HERE
-	PIN_LOW(LED1_PIN);				// <-- EDIT HERE
-	PIN_LOW(LED2_PIN);				// <-- EDIT HERE
 }
 
 
@@ -78,6 +62,25 @@ enum btn_state btn_get_state(enum btn_id id) {
 		default:
 			return depressed;
 	}
+}
+#endif
+
+
+
+#ifdef LEDS_USE
+/**
+ * @fn void led_pins_init(void)
+ * @brief Inits all LED-pins and turns them off
+ * 
+ */
+void led_pins_init(void) {
+	PIN_CONFIG(LED0_PIN, OUTPUT); 	// <-- EDIT HERE
+	PIN_CONFIG(LED1_PIN, OUTPUT); 	// <-- EDIT HERE
+	PIN_CONFIG(LED2_PIN, OUTPUT); 	// <-- EDIT HERE
+
+	PIN_LOW(LED0_PIN);				// <-- EDIT HERE
+	PIN_LOW(LED1_PIN);				// <-- EDIT HERE
+	PIN_LOW(LED2_PIN);				// <-- EDIT HERE
 }
 
 
@@ -151,3 +154,4 @@ void led_driver_toggle(enum led_id id) {
 			break;
 	}
 }
+#endif

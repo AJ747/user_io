@@ -22,32 +22,40 @@
 //---------------------------//
 // Define begin
 //---------------------------//
-/// Comment out if alternative method is used
-//#define ALTERNATIVE_IRQ_METHOD								// <-- EDIT HERE			
-//---------------------------//
-// Define end
-//---------------------------//
+/// Uncomment if alternative method is used
+//#define ALTERNATIVE_IRQ_METHOD // <-- EDIT HERE
 
 
 
-//---------------------------//
-// Define begin
-//---------------------------//
-/// USER IO
-// Here the IRQ handler is called every 10 ms
-#define USER_IO_HANDLER_PERIOD_MS TIMx_PERIOD_MS				// <-- EDIT HERE
+// Comment if feature is not needed
+#define BTNS_USE // <-- EDIT HERE
+#define LEDS_USE // <-- EDIT HERE
+#define INTERVALS_USE // <-- EDIT HERE
 
-/// BTN
-// Amount of buttons used
-#define BTNS_AMOUNT	3											// <-- EDIT HERE
+
+
+// IRQ handler is called every 10 ms // <-- EDIT HERE
+#define USER_IO_HANDLER_PERIOD_MS TIMx_PERIOD_MS // <-- EDIT HERE
+
+
+
+#ifdef BTNS_USE
 // Button sampling time, alter if faster clicking is required
-#define BTN_DEBOUNCE_TRESHOLD_MS 20								// <-- EDIT HERE
-// Time to wait before button press is registered as hold
-#define BTN_HOLD_TRESHOLD_MS 1000							 	// <-- EDIT HERE
+#define BTN_DEBOUNCE_TRESHOLD_MS 20	// <-- EDIT HERE
+#define BTNS_AMOUNT	3 // <-- EDIT HERE
+#endif
 
-/// LED
-// Amount of LEDs used
-#define LEDS_AMOUNT	3		 									// <-- EDIT HERE
+
+
+#ifdef LEDS_USE
+#define LEDS_AMOUNT	3	// <-- EDIT HERE
+#endif
+
+
+
+#ifdef INTERVALS_USE
+#define INTERVALS_AMOUNT 3	// <-- EDIT HERE
+#endif
 //---------------------------//
 // Define end
 //---------------------------//
@@ -57,25 +65,38 @@
 //---------------------------//
 // Enum begin
 //---------------------------//
-// Btn
+#ifdef BTNS_USE
 enum btn_state {
 	depressed = 0,
 	pressed = 1,
 };
 
 enum btn_id {
-	BTN0 = 0,  	// <-- EDIT HERE
-	BTN1,  		// <-- EDIT HERE
-	BTN2,  		// <-- EDIT HERE
-	BTN3  		// <-- EDIT HERE
+	BTN0 = 0, // <-- EDIT HERE
+	BTN1, // <-- EDIT HERE
+	BTN2 // <-- EDIT HERE
 };
+#endif
 
-// LED
+
+
+#ifdef LEDS_USE
 enum led_id {
-	LED0 = 0,  	// <-- EDIT HERE
-	LED1,  		// <-- EDIT HERE
-	LED2  		// <-- EDIT HERE
+	LED0 = 0, // <-- EDIT HERE
+	LED1, // <-- EDIT HERE
+	LED2 // <-- EDIT HERE
 };
+#endif
+
+
+
+#ifdef INTERVALS_USE
+enum interval_id {
+	INTERVAL0 = 0, // <-- EDIT HERE
+	INTERVAL1, // <-- EDIT HERE
+	INTERVAL2, // <-- EDIT HERE
+};
+#endif
 //---------------------------//
 // Enum end
 //---------------------------//
