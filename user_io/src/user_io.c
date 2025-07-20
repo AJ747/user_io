@@ -283,8 +283,8 @@ uint8_t btn_click(enum btn_id id) {
 static void btns_init(void) {
 	for (uint8_t id = 0; id < BTNS_AMOUNT; id++) {
 		btn[id].id = id;
-		btn[id].curr_state = depressed;
-		btn[id].last_state = depressed;
+		btn[id].curr_state = DEPRESSED;
+		btn[id].last_state = DEPRESSED;
 		btn[id].debounce_counter = 0;
 		btn[id].press_counter = 0;
 		btn[id].click = false;		
@@ -305,15 +305,15 @@ static void btns_handle_states(void) {
 		btn_debounce(id);
 		
 		// Check for click
-		if ((btn[id].curr_state == pressed) && (btn[id].last_state == depressed)) {
+		if ((btn[id].curr_state == PRESSED) && (btn[id].last_state == DEPRESSED)) {
 			btn[id].click = true;
 			
 		// Check for hold 
-		} else if ((btn[id].curr_state == pressed) && (btn[id].last_state == pressed)) {
+		} else if ((btn[id].curr_state == PRESSED) && (btn[id].last_state == PRESSED)) {
 			btn[id].hold_duration += USER_IO_HANDLER_PERIOD_MS;		
 			
 		// Check for release
-		} else if ((btn[id].curr_state == depressed) && (btn[id].last_state == pressed)) {
+		} else if ((btn[id].curr_state == DEPRESSED) && (btn[id].last_state == PRESSED)) {
 			btn[id].released = true;
 			btn[id].hold_duration = 0;
 		}
@@ -338,12 +338,12 @@ static void btn_debounce(enum btn_id id) {
 		
 		// Register as press
 		if (btn[id].press_counter > 0) {
-			btn[id].curr_state = pressed;
+			btn[id].curr_state = PRESSED;
 			btn[id].press_counter = 0;
 			
 		// Register as depressed, reset state
 		} else {
-			btn[id].curr_state = depressed;
+			btn[id].curr_state = DEPRESSED;
 		}
 		
 		btn[id].debounce_counter = 0;

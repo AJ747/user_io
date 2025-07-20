@@ -60,7 +60,7 @@ enum btn_state btn_get_state(enum btn_id id) {
 			return !PIN_READ(BTN2_PIN); 	// <-- EDIT HERE
 			
 		default:
-			return depressed;
+			return DEPRESSED;
 	}
 }
 #endif

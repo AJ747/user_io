@@ -67,8 +67,8 @@
 //---------------------------//
 #ifdef BTNS_USE
 enum btn_state {
-	depressed = 0,
-	pressed = 1,
+	DEPRESSED = 0,
+	PRESSED = 1,
 };
 
 enum btn_id {
