@@ -86,8 +86,6 @@ A quick guide on how to properly port the User IO library to any embedded platfo
 > [!NOTE]
 > A dedicated timer is needed that triggers an interrupt every *x* milliseconds.
 
-<br>
-
 > [!IMPORTANT]
 > Button, LED-states and "intervals" are all updated in the TIMx IRQ handler, this can take some time. Advised to use lowest IRQ priority for TIMx if possible. 
 >
