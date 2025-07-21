@@ -5,7 +5,6 @@ User IO is a library for reading buttons, controlling LEDs and running code with
 It needs a timer to trigger its handler every *x* milliseconds to function properly.
 
 > [!NOTE]
->
 > It's recommended to call the handler a minimum of every 10 ms. Calling it quicker than this will result in poor system performance. 
 
 ----
@@ -34,17 +33,12 @@ It needs a timer to trigger its handler every *x* milliseconds to function prope
     * For *x* milliseconds - `led_all_blink_ms()`
 
 > [!IMPORTANT]
->
 > If a LED is set to a new effect when an ongoing effect hasn't finished, then the ongoing effect will be discarded.
 
-<br>
-
 > [!WARNING]
-> 
 > `led_off()` and `led_all_off()` only works for effects lasting indefinitely. Does not work with effects lasting a finite time as these automatically turn off when the effect is done.
->
+
 > [!TIP]
->
 > Use `led_force_off()` and `led_all_force_off()` instead, this will force the LED to turn off no matter what effect is currently ongoing. 
 
 ----
@@ -81,7 +75,6 @@ int main(void) {
 ```
 
 > [!IMPORTANT]
->
 > An "interval" counter can run up to ~49 days, 2^32 ms, before overflowing.
 
 ----
@@ -91,18 +84,14 @@ int main(void) {
 A quick guide on how to properly port the User IO library to any embedded platform. Here you must open some source-files and edit lines, I've added `// <-- EDIT HERE` on every line you must edit. 
 
 > [!NOTE]
->
 > A dedicated timer is needed that triggers an interrupt every *x* milliseconds.
 
 <br>
 
 > [!IMPORTANT]
->
 > Button, LED-states and "intervals" are all updated in the TIMx IRQ handler, this can take some time. Advised to use lowest IRQ priority for TIMx if possible. 
 >
 > See [step 2 - Timer setup (Alternative method)](#2-timer-setup-alternative-method) for an alternative method where we set a simple flag in the TIMx IRQ handler and run the User IO handler in the main-loop.
->
-> [!CAUTION] 
 >
 > This will cause timing to always be off by a certain amount depending on what's in the main loop.
 ----
@@ -143,7 +132,6 @@ void TIMx_IRQHandler(void) {
 ```
 
 > [!IMPORTANT]
->
 > Advised to configure TIMx IRQ handler with the lowest possible priority.
 
 <br>
@@ -202,13 +190,8 @@ int main(void) {
 }
 ```
 
-> [!IMPORTANT]
->
-> Since the alternative method is used, there will not be a fixed interval between updating states. 
->
 > [!CAUTION]
->
-> This means that timing will always be off by a certain amount depending on what's in the main loop.
+> Since the alternative method is used, there will not be a fixed interval between updating states. This means that timing will always be off by a certain amount depending on what's in the main loop.
 
 <br>
 
@@ -244,7 +227,6 @@ Here we have 3 buttons, 3 LEDs and 3 "intervals".
 Open `user_io_driver.c` and find `btn_pins_init()` and `led_pins_init()`. Here you must add code to init GPIO pins used for buttons and LEDs, then turn all LEDs off.
 
 > [!NOTE]
->
 > Recommended to use internal pull-ups on buttons if available, results in easier PCB routing if ground plane is used.
 
 ```C
@@ -275,7 +257,6 @@ void led_pins_init(void) {
 Open `user_io_driver.c` and find `btn_get_state()`,  `led_driver_on()`, `led_driver_off()` and `led_driver_toggle()`. Add code to set, reset and toggle the pins as shows below:
 
 > [!IMPORTANT]
->
 > If internal pull-ups are used, remember to invert when polling the button-pin as shown below. Meaning, use `!PIN_READ(BTNx_PIN);` instead of `PIN_READ(BTNx_PIN);`.
 
 ```C
@@ -427,7 +408,6 @@ void TIMx_IRQHandler(void) {
 ```
 
 > [!NOTE]
->
 > For more documentation, see the Doxygen folder. Path is "doxygen/html/index.html".
 
  
