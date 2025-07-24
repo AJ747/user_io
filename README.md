@@ -1,6 +1,6 @@
 # About User IO - Porting guide below
 
-User IO is a library for reading buttons, controlling LEDs and running code with fixed intervals in a non-blocking way for embedded applications written in C. Add up to 256 buttons, LEDs and "intervals" to your project and control them easily using User IO. You can also choose which features you want to use, and which to exclude, see [step 4 - Update macro-parameters](#4-Update-macro-parameters) in the porting guide.
+User IO is a library for reading buttons, switches, controlling LEDs and running code with fixed intervals in a non-blocking way for embedded applications written in C. Add up to 256 buttons, LEDs and "intervals" to your project and control them easily using User IO, add unlimited amount of switches. You can also choose which features you want to use, and which to exclude, see [step 4 - Update macro-parameters](#4-Update-macro-parameters) in the porting guide.
 
 It needs a timer to trigger its handler every *x* milliseconds to function properly.
 
@@ -48,7 +48,14 @@ It needs a timer to trigger its handler every *x* milliseconds to function prope
 * Sense hold (custom threshold) - `btn_hold_ms()`
 * Sense release after click/hold - `btn_released()`
 * Sense if depressed - `btn_depressed()`
+* Sense no input on all btns for a given duration - `btns_no_input_ms()`
 * All buttons debounced (custom threshold)
+
+----
+
+#### Features for switch-sensing:
+* Sense on - `switch_on()`
+* Sense off - `switch_off()`
 
 ----
 
@@ -87,7 +94,7 @@ A quick guide on how to properly port the User IO library to any embedded platfo
 > A dedicated timer is needed that triggers an interrupt every *x* milliseconds.
 
 > [!IMPORTANT]
-> Button, LED-states and "intervals" are all updated in the TIMx IRQ handler, this can take some time. Advised to use lowest IRQ priority for TIMx if possible. 
+> Button, LED-states and "intervals" are all updated in the TIMx IRQ handler, this can take some time. Advised to use lowest IRQ priority for TIMx if possible. Switches are read from directly, these states are not stored.
 >
 > See [step 2 - Timer setup (Alternative method)](#2-timer-setup-alternative-method) for an alternative method where we set a simple flag in the TIMx IRQ handler and run the User IO handler in the main-loop.
 >
@@ -193,10 +200,15 @@ int main(void) {
 
 <br>
 
-#### 3.1 Choose amount of buttons, LEDs and "intervals"
-Choose the amount of buttons and LEDs used by opening `user_io_config.h` and adding these to `enum led_id`, `enum btn_id` and `enum interval_id` as follows:
+#### 3.1 Choose amount of buttons, switches, LEDs and "intervals"
+Choose the amount of buttons and LEDs used by opening `user_io_config.h` and adding these to `enum led_id`, `enum btn_id`, `enum switch_id` and `enum interval_id` as follows:
 
 ```C
+enum switch_id {
+	SW0 = 0, 	// <-- EDIT HERE
+	SW1,		// <-- EDIT HERE
+};
+
 enum btn_id {
 	BTN0 = 0,  	// <-- EDIT HERE
 	BTN1,  		// <-- EDIT HERE
@@ -222,12 +234,18 @@ Here we have 3 buttons, 3 LEDs and 3 "intervals".
 
 #### 3.2 Init pins
 
-Open `user_io_driver.c` and find `btn_pins_init()` and `led_pins_init()`. Here you must add code to init GPIO pins used for buttons and LEDs, then turn all LEDs off.
+Open `user_io_driver.c` and find `btn_pins_init()`, `switch_pins_init()` and `led_pins_init()`. Here you must add code to init GPIO pins used for buttons and LEDs, then turn all LEDs off.
 
 > [!NOTE]
 > Recommended to use internal pull-ups on buttons if available, results in easier PCB routing if ground plane is used.
 
 ```C
+void switch_pins_init(void) {
+	// Button pins as output with internal pull-up
+	PIN_CONFIG(SW0_PIN, INPUT_PULL_UP); 	// <-- EDIT HERE
+	PIN_CONFIG(SW1_PIN, INPUT_PULL_UP); 	// <-- EDIT HERE
+}
+
 void btn_pins_init(void) {
     // Button pins as output with internal pull-up
     PIN_CONFIG(BTN0_PIN, INPUT_PULL_UP); // <-- EDIT HERE
@@ -252,12 +270,25 @@ void led_pins_init(void) {
 
 #### 3.3 Modify drivers
 
-Open `user_io_driver.c` and find `btn_get_state()`,  `led_driver_on()`, `led_driver_off()` and `led_driver_toggle()`. Add code to set, reset and toggle the pins as shows below:
+Open `user_io_driver.c` and find `btn_get_state()`, `switch_get_state()`,  `led_driver_on()`, `led_driver_off()` and `led_driver_toggle()`. Add code to set, reset and toggle the pins as shows below:
 
 > [!IMPORTANT]
-> If internal pull-ups are used, remember to invert when polling the button-pin as shown below. Meaning, use `!PIN_READ(BTNx_PIN);` instead of `PIN_READ(BTNx_PIN);`.
+> If internal pull-ups are used, remember to invert when polling the button-pin and switch-pin as shown below. Meaning, use `!PIN_READ(BTNx_PIN);` and `!PIN_READ(SWx_PIN);` instead of `PIN_READ(BTNx_PIN);` and `PIN_READ(SWx_PIN);`.
 
 ```C
+enum switch_state switch_get_state(enum switch_id id) {
+	switch (id) {
+		case SW0:
+			return !PIN_READ(SW0_PIN); // <-- EDIT HERE
+			
+		case SW1:
+			return !PIN_READ(SW1_PIN); // <-- EDIT HERE
+		
+		default:
+			return SWITCH_OFF;
+	}
+}
+
 enum btn_state btn_get_state(enum btn_id id) {
 	switch (id) {
 		case BTN0: 
@@ -270,7 +301,7 @@ enum btn_state btn_get_state(enum btn_id id) {
 			return !PIN_READ(BTN2_PIN); // <-- EDIT HERE
 			
 		default:
-			return DEPRESSED;
+			return BTN_DEPRESSED;
 	}
 }
 
@@ -323,7 +354,7 @@ void led_driver_toggle(enum led_id id) {
 }
 ```
 
-If you are using more or less buttons and LEDs than shown here, then you must add `case BTNx:` or `case LEDx:` to each respective function.
+If you are using more or less buttons, switches and LEDs than shown here, then you must add `case BTNx:`, `case SWx:` or `case LEDx:` to each respective function.
 
 <br>
 
@@ -336,6 +367,7 @@ Open `user_io_config.h` and find the `#define` section, then alter the following
 //#define ALTERNATIVE_IRQ_METHOD // <-- EDIT HERE
 
 // Comment if feature is not needed
+#define SWITCHES_USE  // <-- EDIT HERE
 #define BTNS_USE // <-- EDIT HERE
 #define LEDS_USE // <-- EDIT HERE
 #define INTERVALS_USE // <-- EDIT HERE
@@ -390,6 +422,18 @@ int main(void) {
 	// Prints every 1000 ms 
 	if (interval_reached_ms(INTERVAL0, 1000)) {
 		printf("Hello, World!");
+	}
+
+	// Force all leds off if switch on
+	if (switch_on(SW0)) {
+		led_all_force_off();
+	}
+
+	// Enters sleep if no input for 60 sec
+	if (btns_no_input_ms(60000)) {
+		...
+		screen_off();
+		enter_sleep();
 	}
     }
 }

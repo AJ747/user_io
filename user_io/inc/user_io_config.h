@@ -1,7 +1,7 @@
 /**
  *
  * @file user_io_config.h
- * @version 1.0.0
+ * @version 1.1.0
  *
  * ------------------------------
  *
@@ -28,6 +28,7 @@
 
 
 // Comment if feature is not needed
+#define SWITCHES_USE  // <-- EDIT HERE
 #define BTNS_USE // <-- EDIT HERE
 #define LEDS_USE // <-- EDIT HERE
 #define INTERVALS_USE // <-- EDIT HERE
@@ -65,10 +66,24 @@
 //---------------------------//
 // Enum begin
 //---------------------------//
+#ifdef SWITCHES_USE
+enum switch_state {
+	SWITCH_OFF = 0,
+	SWITCH_ON
+};
+
+enum switch_id {
+	SW0 = 0,  // <-- EDIT HERE
+	SW1,  // <-- EDIT HERE
+};
+#endif
+
+
+
 #ifdef BTNS_USE
 enum btn_state {
-	DEPRESSED = 0,
-	PRESSED = 1,
+	BTN_DEPRESSED = 0,
+	BTN_PRESSED = 1,
 };
 
 enum btn_id {

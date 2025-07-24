@@ -1,7 +1,7 @@
 /**
  *
  * @file user_io_driver.c
- * @version 1.0.0
+ * @version 1.1.0
  *
  * ------------------------------
  *
@@ -23,6 +23,41 @@
 //---------------------------//
 // Include end
 //---------------------------//
+
+
+
+#ifdef SWITCHES_USE
+/**
+ * @fn void btn_pins_init(void)
+ * @brief Inits all switch-pins and applies internal pull-up // <-- EDIT HERE
+ */
+void switch_pins_init(void) {
+	PIN_CONFIG(SW0_PIN, INPUT_PULL_UP); 	// <-- EDIT HERE
+	PIN_CONFIG(SW1_PIN, INPUT_PULL_UP); 	// <-- EDIT HERE
+}
+
+
+
+/**
+ * @fn enum switch_state switch_get_state(enum switch_id)
+ * @brief Returns state of switch
+ * 
+ * @param id (enum switch_id) switch id
+ * @return (enum switch_state) SWITCH_OFF or SWITCH_ON
+ */
+enum switch_state switch_get_state(enum switch_id id) {
+	switch (id) {
+		case SW0:
+			return !PIN_READ(SW0_PIN); 	// <-- EDIT HERE
+			
+		case SW1:
+			return !PIN_READ(SW1_PIN); 	// <-- EDIT HERE
+		
+		default:
+			return SWITCH_OFF;
+	}
+}
+#endif
 
 
 
@@ -60,7 +95,7 @@ enum btn_state btn_get_state(enum btn_id id) {
 			return !PIN_READ(BTN2_PIN); 	// <-- EDIT HERE
 			
 		default:
-			return DEPRESSED;
+			return BTN_DEPRESSED;
 	}
 }
 #endif

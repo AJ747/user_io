@@ -1,7 +1,7 @@
 /**
  *
  * @file user_io_driver.h
- * @version 1.0.0
+ * @version 1.1.0
  *
  * ------------------------------
  *
@@ -34,6 +34,13 @@
 //---------------------------//
 // Prototypes begin
 //---------------------------//
+#ifdef SWITCHES_USE
+void switch_pins_init(void);
+enum switch_state switch_get_state(enum switch_id id);
+#endif
+
+
+
 #ifdef BTNS_USE
 void btn_pins_init(void);
 enum btn_state btn_get_state(enum btn_id id);

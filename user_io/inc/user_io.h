@@ -1,7 +1,7 @@
 /**
  *
  * @file user_io.h
- * @version 1.0.0
+ * @version 1.1.0
  *
  * ------------------------------
  *
@@ -39,11 +39,19 @@ void user_io_irq_handler(void);
 
 
 
+#ifdef SWITCHES_USE
+uint8_t switch_on(enum switch_id id);
+uint8_t switch_off(enum switch_id id);
+#endif
+
+
+
 #ifdef BTNS_USE
 uint8_t btn_hold_ms(enum btn_id id, uint16_t ms);
 uint8_t btn_click(enum btn_id id);
 uint8_t btn_released(enum btn_id id);
 uint8_t btn_depressed(enum btn_id id);
+uint8_t btns_no_input_ms(uint32_t idle_ms);
 #endif
 
 

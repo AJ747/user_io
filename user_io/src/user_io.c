@@ -1,7 +1,7 @@
 /**
  *
  * @file user_io.c
- * @version 1.0.0
+ * @version 1.1.0
  *
  * ------------------------------
  *
@@ -31,6 +31,7 @@
 // Define begin
 //---------------------------//
 #ifdef BTNS_USE
+#define BTNS_IDLE_MS_MAX (0xFFFFFFFF - USER_IO_HANDLER_PERIOD_MS)
 #define BTN_DEBOUNCE_TRESHOLD (BTN_DEBOUNCE_TRESHOLD_MS / USER_IO_HANDLER_PERIOD_MS)
 #endif
 //---------------------------//
@@ -137,6 +138,7 @@ volatile uint8_t user_io_handle_rdy = 0;
 
 
 #ifdef BTNS_USE
+static uint32_t btns_idle_counter_ms = 0;
 static struct btn btn[BTNS_AMOUNT];
 #endif
 
@@ -163,6 +165,12 @@ static uint32_t interval[INTERVALS_AMOUNT] = {0};
  * 
  */
 void user_io_init(void) {
+#ifdef SWITCHES_USE
+	switch_pins_init();
+#endif
+
+
+
 #ifdef BTNS_USE
 	btn_pins_init();
 	btns_init();
@@ -207,6 +215,34 @@ void user_io_irq_handler(void) {
 	intervals_update();
 #endif
 }
+
+
+
+#ifdef SWITCHES_USE
+/**
+ * @fn uint8_t switch_check(enum switch_id)
+ * @brief Checks if switch is on
+ * 
+ * @param id (uint8_t) swtich id
+ * @return (uint8_t) true or false
+ */
+uint8_t switch_on(enum switch_id id) {
+	return switch_get_state(id);
+}
+
+
+
+/**
+ * @fn uint8_t switch_off(enum switch_id)
+ * @brief Checks if switch is off
+ * 
+ * @param id (uint8_t) switch id
+ * @return (uint8_t) true or false
+ */
+uint8_t switch_off(enum switch_id id) {
+	return !switch_get_state(id);
+}
+#endif
 
 
 
@@ -276,6 +312,22 @@ uint8_t btn_click(enum btn_id id) {
 
 
 /**
+ * @fn uint8_t btns_no_input_ms(uint32_t)
+ * @brief Checks for lack of input on all btns for more than idle_ms
+ * 
+ * @param idle_ms (uint32_t) no input threshold
+ * @return (uint8_t) true or false
+ */
+uint8_t btns_no_input_ms(uint32_t idle_ms) {
+	if (btns_idle_counter_ms > idle_ms) {
+		return true;
+	}
+	return false;
+}
+
+
+
+/**
  * @fn void btns_init(void)
  * @brief Inits all buttons with default params
  * 
@@ -283,8 +335,8 @@ uint8_t btn_click(enum btn_id id) {
 static void btns_init(void) {
 	for (uint8_t id = 0; id < BTNS_AMOUNT; id++) {
 		btn[id].id = id;
-		btn[id].curr_state = DEPRESSED;
-		btn[id].last_state = DEPRESSED;
+		btn[id].curr_state = BTN_DEPRESSED;
+		btn[id].last_state = BTN_DEPRESSED;
 		btn[id].debounce_counter = 0;
 		btn[id].press_counter = 0;
 		btn[id].click = false;		
@@ -301,23 +353,30 @@ static void btns_init(void) {
  * 
  */
 static void btns_handle_states(void) {
+	if (btns_idle_counter_ms < BTNS_IDLE_MS_MAX) {
+		btns_idle_counter_ms += USER_IO_HANDLER_PERIOD_MS;
+	}
+	
 	for (uint8_t id = 0; id < BTNS_AMOUNT; id++) {
 		btn_debounce(id);
 		
 		// Check for click
-		if ((btn[id].curr_state == PRESSED) && (btn[id].last_state == DEPRESSED)) {
+		if ((btn[id].curr_state == BTN_PRESSED) && (btn[id].last_state == BTN_DEPRESSED)) {
 			btn[id].click = true;
+			btns_idle_counter_ms = 0;
 			
 		// Check for hold 
-		} else if ((btn[id].curr_state == PRESSED) && (btn[id].last_state == PRESSED)) {
+		} else if ((btn[id].curr_state == BTN_PRESSED) && (btn[id].last_state == BTN_PRESSED)) {
 			btn[id].hold_duration += USER_IO_HANDLER_PERIOD_MS;		
+			btns_idle_counter_ms = 0;
 			
 		// Check for release
-		} else if ((btn[id].curr_state == DEPRESSED) && (btn[id].last_state == PRESSED)) {
+		} else if ((btn[id].curr_state == BTN_DEPRESSED) && (btn[id].last_state == BTN_PRESSED)) {
 			btn[id].released = true;
 			btn[id].hold_duration = 0;
 		}
 		
+
 		btn[id].last_state = btn[id].curr_state;
 	}
 }
@@ -338,12 +397,12 @@ static void btn_debounce(enum btn_id id) {
 		
 		// Register as press
 		if (btn[id].press_counter > 0) {
-			btn[id].curr_state = PRESSED;
+			btn[id].curr_state = BTN_PRESSED;
 			btn[id].press_counter = 0;
 			
 		// Register as depressed, reset state
 		} else {
-			btn[id].curr_state = DEPRESSED;
+			btn[id].curr_state = BTN_DEPRESSED;
 		}
 		
 		btn[id].debounce_counter = 0;
