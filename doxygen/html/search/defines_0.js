@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['btns_5fuse_0',['BTNS_USE',['../user__io__config_8h.html#aa3b0770fad714ec14f87c34e98ca2afc',1,'user_io_config.h']]]
+  ['switches_5fuse_0',['SWITCHES_USE',['../user__io__config_8h.html#acd66a2078314a643ba57a27039c510cb',1,'user_io_config.h']]]
 ];

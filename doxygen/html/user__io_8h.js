@@ -3,6 +3,7 @@ var user__io_8h =
     [ "btn_click", "user__io_8h.html#a2e9857026223b1353327e133892a0235", null ],
     [ "btn_depressed", "user__io_8h.html#ae84ad78b43cdea503148f8a823882b12", null ],
     [ "btn_released", "user__io_8h.html#a896fe6ce2cb4d3788a472bcfdea417b9", null ],
+    [ "btns_no_input_ms", "user__io_8h.html#ad4970316f7d04dca6406b09577495f8b", null ],
     [ "interval_reached_ms", "user__io_8h.html#a1069ea42ddc5348f2cff87ddecfdb953", null ],
     [ "led_all_blink_infinite", "user__io_8h.html#a8605f4dd965cfa0dd59cae12e55c7df9", null ],
     [ "led_all_blink_ms", "user__io_8h.html#afd5a9b47453ba148845b8568421b292b", null ],
@@ -18,6 +19,7 @@ var user__io_8h =
     [ "led_off", "user__io_8h.html#acedff02a9213dc021881eace8c9fd9a5", null ],
     [ "led_on", "user__io_8h.html#a0ac49d6c2241ae2f40bd9ca7f8a86107", null ],
     [ "led_pulse", "user__io_8h.html#a0dc588bfa628ad64f7b342ac120cab07", null ],
+    [ "switch_off", "user__io_8h.html#a782ca94c449b082c0011b85358c02dd8", null ],
     [ "user_io_init", "user__io_8h.html#a32af9fef60e37e37c2e7389f58b245e4", null ],
     [ "user_io_irq_handler", "user__io_8h.html#a3e293048c2d3fa327c3c12ca25d7f712", null ]
 ];

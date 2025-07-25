@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>User IO: C:/Users/Armin/git/user_io/user_io/inc/user_io.h File Reference</title>
+<title>UserIO: C:/Users/Armin/git/user_io/user_io/inc/user_io.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,7 +26,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">User IO<span id="projectnumber">&#160;v1.0.0</span>
+   <div id="projectname">UserIO<span id="projectnumber">&#160;v1.1.0</span>
    </div>
   </td>
  </tr>
@@ -107,6 +107,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>user_io_init</b> (voi
 <tr class="memdesc:a32af9fef60e37e37c2e7389f58b245e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inits used mcu-periphs and framework used. <br /></td></tr>
 <tr class="memitem:a3e293048c2d3fa327c3c12ca25d7f712" id="r_a3e293048c2d3fa327c3c12ca25d7f712"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3e293048c2d3fa327c3c12ca25d7f712">user_io_irq_handler</a> (void)</td></tr>
 <tr class="memdesc:a3e293048c2d3fa327c3c12ca25d7f712"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks and updates states.  <br /></td></tr>
+<tr class="memitem:ac52becd936597144238ac77ce4c44b9c" id="r_ac52becd936597144238ac77ce4c44b9c"><td class="memItemLeft" align="right" valign="top"><a id="ac52becd936597144238ac77ce4c44b9c" name="ac52becd936597144238ac77ce4c44b9c"></a>
+uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>switch_on</b> (enum switch_id id)</td></tr>
+<tr class="memitem:a782ca94c449b082c0011b85358c02dd8" id="r_a782ca94c449b082c0011b85358c02dd8"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a782ca94c449b082c0011b85358c02dd8">switch_off</a> (enum switch_id id)</td></tr>
+<tr class="memdesc:a782ca94c449b082c0011b85358c02dd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if switch is off.  <br /></td></tr>
 <tr class="memitem:a8b49c6e1a435368dc3750d5e41b05efd" id="r_a8b49c6e1a435368dc3750d5e41b05efd"><td class="memItemLeft" align="right" valign="top"><a id="a8b49c6e1a435368dc3750d5e41b05efd" name="a8b49c6e1a435368dc3750d5e41b05efd"></a>
 uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>btn_hold_ms</b> (enum btn_id id, uint16_t ms)</td></tr>
 <tr class="memitem:a2e9857026223b1353327e133892a0235" id="r_a2e9857026223b1353327e133892a0235"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2e9857026223b1353327e133892a0235">btn_click</a> (enum btn_id id)</td></tr>
@@ -115,6 +119,8 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>btn_hold_ms</b> (e
 <tr class="memdesc:a896fe6ce2cb4d3788a472bcfdea417b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if button is released.  <br /></td></tr>
 <tr class="memitem:ae84ad78b43cdea503148f8a823882b12" id="r_ae84ad78b43cdea503148f8a823882b12"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae84ad78b43cdea503148f8a823882b12">btn_depressed</a> (enum btn_id id)</td></tr>
 <tr class="memdesc:ae84ad78b43cdea503148f8a823882b12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if button is depressed.  <br /></td></tr>
+<tr class="memitem:ad4970316f7d04dca6406b09577495f8b" id="r_ad4970316f7d04dca6406b09577495f8b"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad4970316f7d04dca6406b09577495f8b">btns_no_input_ms</a> (uint32_t idle_ms)</td></tr>
+<tr class="memdesc:ad4970316f7d04dca6406b09577495f8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks for lack of input on all btns for more than idle_ms.  <br /></td></tr>
 <tr class="memitem:a357c7e1887905dea562fee3410ee29c7" id="r_a357c7e1887905dea562fee3410ee29c7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a357c7e1887905dea562fee3410ee29c7">led_blink_infinite</a> (enum led_id id, uint16_t blink_rate_ms)</td></tr>
 <tr class="memdesc:a357c7e1887905dea562fee3410ee29c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies infinite blinking effect to specified LED.  <br /></td></tr>
 <tr class="memitem:aa93324948cb78ba1cd58316d00e1ab4e" id="r_aa93324948cb78ba1cd58316d00e1ab4e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa93324948cb78ba1cd58316d00e1ab4e">led_blink_ms</a> (enum led_id id, uint16_t blink_rate_ms, uint16_t duration_ms)</td></tr>
@@ -150,7 +156,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>led_all_on</b> (void)
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Library for buttons and LEDs. </p>
-<dl class="section version"><dt>Version</dt><dd>1.0.0</dd></dl>
+<dl class="section version"><dt>Version</dt><dd>1.1.0</dd></dl>
 <hr  />
 <dl class="section author"><dt>Author</dt><dd><a href="https://github.com/AJ747">https://github.com/AJ747</a> </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>Jul 12, 2025</dd></dl>
@@ -231,6 +237,32 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>led_all_on</b> (void)
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>(uint8_t) true (1) or false (0) </dd></dl>
+
+</div>
+</div>
+<a id="ad4970316f7d04dca6406b09577495f8b" name="ad4970316f7d04dca6406b09577495f8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4970316f7d04dca6406b09577495f8b">&#9670;&#160;</a></span>btns_no_input_ms()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t btns_no_input_ms </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>idle_ms</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks for lack of input on all btns for more than idle_ms. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">idle_ms</td><td>(uint32_t) no input threshold </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>(uint8_t) true or false </dd></dl>
 
 </div>
 </div>
@@ -601,6 +633,32 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>led_all_on</b> (void)
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a782ca94c449b082c0011b85358c02dd8" name="a782ca94c449b082c0011b85358c02dd8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a782ca94c449b082c0011b85358c02dd8">&#9670;&#160;</a></span>switch_off()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t switch_off </td>
+          <td>(</td>
+          <td class="paramtype">enum switch_id</td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks if switch is off. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>(uint8_t) switch id </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>(uint8_t) true or false </dd></dl>
 
 </div>
 </div>

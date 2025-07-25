@@ -24,7 +24,7 @@
 */
 var NAVTREE =
 [
-  [ "User IO", "index.html", [
+  [ "UserIO", "index.html", [
     [ "Data Structures", "annotated.html", [
       [ "Data Structures", "annotated.html", "annotated_dup" ],
       [ "Data Structure Index", "classes.html", null ]
