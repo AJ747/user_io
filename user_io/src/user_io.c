@@ -226,7 +226,7 @@ void user_io_irq_handler(void) {
  * @param id (uint8_t) swtich id
  * @return (uint8_t) true or false
  */
-uint8_t switch_on(enum switch_id id) {
+bool switch_on(enum switch_id id) {
 	return switch_get_state(id);
 }
 
@@ -239,7 +239,7 @@ uint8_t switch_on(enum switch_id id) {
  * @param id (uint8_t) switch id
  * @return (uint8_t) true or false
  */
-uint8_t switch_off(enum switch_id id) {
+bool switch_off(enum switch_id id) {
 	return !switch_get_state(id);
 }
 #endif
@@ -256,7 +256,7 @@ uint8_t switch_off(enum switch_id id) {
  * 
  * @note Always check for the longest hold duration first to avoid missing longer hold events.
  */
-uint8_t btn_hold_ms(enum btn_id id, uint16_t ms) {
+bool btn_hold_ms(enum btn_id id, uint16_t ms) {
 	return (btn[id].hold_duration >= ms)? true : false;
 }
 
@@ -269,7 +269,7 @@ uint8_t btn_hold_ms(enum btn_id id, uint16_t ms) {
  * @param id (enum btn_id) button to check
  * @return (uint8_t) true (1) or false (0)
  */
-uint8_t btn_depressed(enum btn_id id) {
+bool btn_depressed(enum btn_id id) {
 	return !btn[id].hold_duration;
 }
 
@@ -282,7 +282,7 @@ uint8_t btn_depressed(enum btn_id id) {
  * @param id (enum btn_id) button to check
  * @return (uint8_t) true (1) or false (0)
  */
-uint8_t btn_released(enum btn_id id) {
+bool btn_released(enum btn_id id) {
 	uint8_t temp = btn[id].released;
 	
 	// Reset state
@@ -300,7 +300,7 @@ uint8_t btn_released(enum btn_id id) {
  * @param id (enum btn_id) button to check
  * @return (uint8_t) true (1) or false (0)
  */
-uint8_t btn_click(enum btn_id id) {
+bool btn_click(enum btn_id id) {
 	uint8_t temp = btn[id].click;
 	
 	// Reset state
@@ -318,7 +318,7 @@ uint8_t btn_click(enum btn_id id) {
  * @param idle_ms (uint32_t) no input threshold
  * @return (uint8_t) true or false
  */
-uint8_t btns_no_input_ms(uint32_t idle_ms) {
+bool btns_no_input_ms(uint32_t idle_ms) {
 	if (btns_idle_counter_ms > idle_ms) {
 		return true;
 	}
@@ -839,7 +839,7 @@ static void led_handle_effect_on(enum led_id id) {
  * 
  * @note Can count up to ~49 days, 2^32 ms, before overflow
  */
-uint8_t interval_reached_ms(enum interval_id id, uint32_t ms) {
+bool interval_reached_ms(enum interval_id id, uint32_t ms) {
 	if (interval[id] >= ms) {
 		interval[id] = 0;
 		

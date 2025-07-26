@@ -40,18 +40,18 @@ void user_io_irq_handler(void);
 
 
 #ifdef SWITCHES_USE
-uint8_t switch_on(enum switch_id id);
-uint8_t switch_off(enum switch_id id);
+bool switch_on(enum switch_id id);
+bool switch_off(enum switch_id id);
 #endif
 
 
 
 #ifdef BTNS_USE
-uint8_t btn_hold_ms(enum btn_id id, uint16_t ms);
-uint8_t btn_click(enum btn_id id);
-uint8_t btn_released(enum btn_id id);
-uint8_t btn_depressed(enum btn_id id);
-uint8_t btns_no_input_ms(uint32_t idle_ms);
+bool btn_hold_ms(enum btn_id id, uint16_t ms);
+bool btn_click(enum btn_id id);
+bool btn_released(enum btn_id id);
+bool btn_depressed(enum btn_id id);
+bool btns_no_input_ms(uint32_t idle_ms);
 #endif
 
 
@@ -77,7 +77,7 @@ void led_all_pulse(uint16_t pulse_duration_ms);
 
 
 #ifdef INTERVALS_USE
-uint8_t interval_reached_ms(enum interval_id id, uint32_t ms);
+bool interval_reached_ms(enum interval_id id, uint32_t ms);
 #endif
 //---------------------------//
 // Prototypes end

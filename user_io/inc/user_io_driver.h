@@ -22,8 +22,8 @@
 //---------------------------//
 // Include begin
 //---------------------------//
-#include "stdint.h"
-#include "stdbool.h"
+#include <stdint.h>
+#include <stdbool.h>
 #include "user_io_config.h"
 //---------------------------//
 // Include end
