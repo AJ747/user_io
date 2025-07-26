@@ -2,14 +2,14 @@ var user__io_8c =
 [
     [ "btn", "structbtn.html", null ],
     [ "led", "structled.html", null ],
-    [ "btn_click", "user__io_8c.html#a2e9857026223b1353327e133892a0235", null ],
+    [ "btn_click", "user__io_8c.html#ad879d98a2efa7c90d3e5a8e39aaa61d8", null ],
     [ "btn_debounce", "user__io_8c.html#aaf9a9565f35ae7e20ba80030e23743fb", null ],
-    [ "btn_depressed", "user__io_8c.html#ae84ad78b43cdea503148f8a823882b12", null ],
-    [ "btn_released", "user__io_8c.html#a896fe6ce2cb4d3788a472bcfdea417b9", null ],
+    [ "btn_depressed", "user__io_8c.html#ae015ca5347780f6979d385e218b3d9d1", null ],
+    [ "btn_released", "user__io_8c.html#a30de6b0080f332fb749b26cacf083793", null ],
     [ "btns_handle_states", "user__io_8c.html#a24e8491ccd83d15226dd4ab4adce9da6", null ],
     [ "btns_init", "user__io_8c.html#ad4227c0dcceb1ee30ea7eb32648495af", null ],
-    [ "btns_no_input_ms", "user__io_8c.html#ad4970316f7d04dca6406b09577495f8b", null ],
-    [ "interval_reached_ms", "user__io_8c.html#a1069ea42ddc5348f2cff87ddecfdb953", null ],
+    [ "btns_no_input_ms", "user__io_8c.html#a326b938c31c5ceac385a5e46924ded3d", null ],
+    [ "interval_reached_ms", "user__io_8c.html#ab5a24bf480745393f11cb6ecc7b31730", null ],
     [ "intervals_init", "user__io_8c.html#af708e9d8a8a2daf0a881c4b62695de9e", null ],
     [ "intervals_update", "user__io_8c.html#a0751e5582b6e25adf7a61fdd108e8ae8", null ],
     [ "led_all_blink_infinite", "user__io_8c.html#a8605f4dd965cfa0dd59cae12e55c7df9", null ],
@@ -33,7 +33,7 @@ var user__io_8c =
     [ "led_pulse", "user__io_8c.html#a0dc588bfa628ad64f7b342ac120cab07", null ],
     [ "leds_handle_effects", "user__io_8c.html#a3651cda7d61319a8f72e1df63da98150", null ],
     [ "leds_init", "user__io_8c.html#a0892e076b365fc49b55bd0f90ab09222", null ],
-    [ "switch_off", "user__io_8c.html#a782ca94c449b082c0011b85358c02dd8", null ],
+    [ "switch_off", "user__io_8c.html#a942099f6c28fb130f3da08d8d6ce32cb", null ],
     [ "user_io_init", "user__io_8c.html#a32af9fef60e37e37c2e7389f58b245e4", null ],
     [ "user_io_irq_handler", "user__io_8c.html#a3e293048c2d3fa327c3c12ca25d7f712", null ]
 ];
