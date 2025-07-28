@@ -64,14 +64,14 @@ enum led_state {
 //---------------------------//
 #ifdef BTNS_USE
 struct btn {
-	enum btn_id id;
-	enum btn_state curr_state;
-	enum btn_state last_state;
+	uint16_t hold_duration;
 	uint8_t debounce_counter;
 	uint8_t press_counter;
 	uint8_t click;
 	uint8_t released;
-	uint16_t hold_duration;
+	enum btn_state curr_state;
+	enum btn_state last_state;
+	enum btn_id id;
 };
 #endif
 
@@ -79,13 +79,12 @@ struct btn {
 
 #ifdef LEDS_USE
 struct led {
+	int16_t effect_counter;
+	uint16_t effect_rate;
+	int16_t effect_duration;
 	enum led_id id;
 	enum led_state set_state;
 	enum led_state curr_state;
-	int16_t blink_counter;
-	uint16_t blink_rate;
-	int16_t blink_duration;
-	int16_t pulse_duration;
 };
 #endif
 //---------------------------//
@@ -220,11 +219,11 @@ void user_io_irq_handler(void) {
 
 #ifdef SWITCHES_USE
 /**
- * @fn uint8_t switch_check(enum switch_id)
+ * @fn bool switch_check(enum switch_id)
  * @brief Checks if switch is on
  * 
- * @param id (uint8_t) swtich id
- * @return (uint8_t) true or false
+ * @param id (enum switch_id)
+ * @return (bool)
  */
 bool switch_on(enum switch_id id) {
 	return switch_get_state(id);
@@ -233,11 +232,11 @@ bool switch_on(enum switch_id id) {
 
 
 /**
- * @fn uint8_t switch_off(enum switch_id)
+ * @fn bool switch_off(enum switch_id)
  * @brief Checks if switch is off
  * 
- * @param id (uint8_t) switch id
- * @return (uint8_t) true or false
+ * @param id (enum switch_id)
+ * @return (bool)
  */
 bool switch_off(enum switch_id id) {
 	return !switch_get_state(id);
@@ -248,11 +247,11 @@ bool switch_off(enum switch_id id) {
 
 #ifdef BTNS_USE
 /**
- * @fn uint8_t btn_hold(enum btn_id)
+ * @fn bool btn_hold(enum btn_id)
  * @brief Checks if button is held down more than threshold in milliseconds
  * 
- * @param id (enum btn_id) button to check
- * @return (uint8_t) true or false
+ * @param id (enum btn_id)
+ * @return (bool)
  * 
  * @note Always check for the longest hold duration first to avoid missing longer hold events.
  */
@@ -263,11 +262,11 @@ bool btn_hold_ms(enum btn_id id, uint16_t ms) {
 
 
 /**
- * @fn uint8_t btn_depressed(enum btn_id)
+ * @fn bool btn_depressed(enum btn_id)
  * @brief Checks if button is depressed
  * 
- * @param id (enum btn_id) button to check
- * @return (uint8_t) true (1) or false (0)
+ * @param id (enum btn_id)
+ * @return (bool)
  */
 bool btn_depressed(enum btn_id id) {
 	return !btn[id].hold_duration;
@@ -276,11 +275,11 @@ bool btn_depressed(enum btn_id id) {
 
 
 /**
- * @fn uint8_t btn_released(enum btn_id)
+ * @fn bool btn_released(enum btn_id)
  * @brief Checks if button is released
  * 
- * @param id (enum btn_id) button to check
- * @return (uint8_t) true (1) or false (0)
+ * @param id (enum btn_id)
+ * @return (bool)
  */
 bool btn_released(enum btn_id id) {
 	uint8_t temp = btn[id].released;
@@ -294,11 +293,11 @@ bool btn_released(enum btn_id id) {
 
 
 /**
- * @fn uint8_t btn_click(enum btn_id)
+ * @fn bool btn_click(enum btn_id)
  * @brief Checks if click is registered on specified button
  * 
- * @param id (enum btn_id) button to check
- * @return (uint8_t) true (1) or false (0)
+ * @param id (enum btn_id)
+ * @return (bool)
  */
 bool btn_click(enum btn_id id) {
 	uint8_t temp = btn[id].click;
@@ -312,11 +311,11 @@ bool btn_click(enum btn_id id) {
 
 
 /**
- * @fn uint8_t btns_no_input_ms(uint32_t)
+ * @fn bool btns_no_input_ms(uint32_t)
  * @brief Checks for lack of input on all btns for more than idle_ms
  * 
  * @param idle_ms (uint32_t) no input threshold
- * @return (uint8_t) true or false
+ * @return (bool)
  */
 bool btns_no_input_ms(uint32_t idle_ms) {
 	if (btns_idle_counter_ms > idle_ms) {
@@ -424,7 +423,7 @@ static void btn_debounce(enum btn_id id) {
  */
 void led_blink_infinite(enum led_id id, uint16_t blink_rate_ms) {
 	led[id].set_state = BLINK_INFINITE;
-	led[id].blink_rate = blink_rate_ms;
+	led[id].effect_rate = blink_rate_ms;
 }
 
 
@@ -439,8 +438,8 @@ void led_blink_infinite(enum led_id id, uint16_t blink_rate_ms) {
  */
 void led_blink_ms(enum led_id id, uint16_t blink_rate_ms, uint16_t duration_ms) {
 	led[id].set_state = BLINK_MS;
-	led[id].blink_rate = blink_rate_ms;
-	led[id].blink_duration = (int16_t) duration_ms;
+	led[id].effect_rate = blink_rate_ms;
+	led[id].effect_duration = (int16_t) duration_ms;
 }
 
 
@@ -455,8 +454,8 @@ void led_blink_ms(enum led_id id, uint16_t blink_rate_ms, uint16_t duration_ms) 
  */
 void led_blink_n_times(enum led_id id, uint16_t blink_rate_ms, uint16_t n) {
 	led[id].set_state = BLINK_N_TIMES;
-	led[id].blink_rate = blink_rate_ms;
-	led[id].blink_duration = (int16_t) (n<<1); // Double, because off and on counts as 1 time each 
+	led[id].effect_rate = blink_rate_ms;
+	led[id].effect_duration = (int16_t) (n<<1); // Double, because off and on counts as 1 time each 
 }
 
 
@@ -476,7 +475,7 @@ void led_off(enum led_id id) {
 		led[id].set_state = OFF;
 		
 		// Makes sure start of blink effect is the same
-		led[id].blink_counter = 0;
+		led[id].effect_counter = 0;
 	}
 }
 
@@ -492,7 +491,7 @@ void led_force_off(enum led_id id) {
 	led[id].set_state = OFF;
 	
 	// Makes sure start of blink effect is the same
-	led[id].blink_counter = 0;
+	led[id].effect_counter = 0;
 }
 
 
@@ -518,7 +517,7 @@ void led_on(enum led_id id) {
  */
 void led_pulse(enum led_id id, uint16_t pulse_duration_ms) {
 	led[id].set_state = PULSE;
-	led[id].pulse_duration = (int16_t) pulse_duration_ms;
+	led[id].effect_duration = (int16_t) pulse_duration_ms;
 }
 
 
@@ -632,10 +631,9 @@ static void leds_init(void) {
 		led[id].id = id;
 		led[id].set_state = OFF;
 		led[id].curr_state = OFF;
-		led[id].blink_counter = 0;
-		led[id].blink_rate = 0;	
-		led[id].blink_duration = 0;
-		led[id].pulse_duration = 0;
+		led[id].effect_counter = 0;
+		led[id].effect_rate = 0;	
+		led[id].effect_duration = 0;
 	}
 }
 
@@ -687,16 +685,16 @@ static void leds_handle_effects(void) {
  */
 static void led_handle_effect_blink_infinite(enum led_id id) {
 	// Time to toggle
-	if (led[id].blink_counter <= 0) {
+	if (led[id].effect_counter <= 0) {
 		led_driver_toggle(id);
 		led[id].curr_state = BLINK_INFINITE;
 		
 		// Reset counter
-		led[id].blink_counter = (int16_t) led[id].blink_rate;
+		led[id].effect_counter = (int16_t) led[id].effect_rate;
 	}
 	
 	// Remaining time to toggle
-	led[id].blink_counter -= USER_IO_HANDLER_PERIOD_MS;
+	led[id].effect_counter -= USER_IO_HANDLER_PERIOD_MS;
 }
 
 
@@ -709,7 +707,7 @@ static void led_handle_effect_blink_infinite(enum led_id id) {
  */
 static void led_handle_effect_blink_ms(enum led_id id) {
 	// Effect is done
-	if (led[id].blink_duration <= 0) {
+	if (led[id].effect_duration <= 0) {
 		led_driver_off(id);
 		
 		led[id].set_state = OFF;
@@ -718,19 +716,19 @@ static void led_handle_effect_blink_ms(enum led_id id) {
 	}
 	
 	// Calc remaining effect time
-	led[id].blink_duration -= USER_IO_HANDLER_PERIOD_MS;
+	led[id].effect_duration -= USER_IO_HANDLER_PERIOD_MS;
 	
 	// Time to toggle
-	if (led[id].blink_counter <= 0) {
+	if (led[id].effect_counter <= 0) {
 		led_driver_toggle(id);
 		led[id].curr_state = BLINK_MS;
 		
 		// Reset counter
-		led[id].blink_counter = (int16_t) led[id].blink_rate;
+		led[id].effect_counter = (int16_t) led[id].effect_rate;
 	}
 	
 	// Remaining time to toggle
-	led[id].blink_counter -= USER_IO_HANDLER_PERIOD_MS;
+	led[id].effect_counter -= USER_IO_HANDLER_PERIOD_MS;
 }
 
 
@@ -743,7 +741,7 @@ static void led_handle_effect_blink_ms(enum led_id id) {
  */
 static void led_handle_effect_blink_n_times(enum led_id id) {
 	// N times reached
-	if (led[id].blink_duration <= 0) {
+	if (led[id].effect_duration <= 0) {
 		led_driver_off(id);
 		
 		led[id].set_state = OFF;
@@ -752,19 +750,19 @@ static void led_handle_effect_blink_n_times(enum led_id id) {
 	}
 	
 	// Time to toggle
-	if (led[id].blink_counter <= 0) {
+	if (led[id].effect_counter <= 0) {
 		led_driver_toggle(id);
 		led[id].curr_state = BLINK_N_TIMES;
 		
 		// Reset counter
-		led[id].blink_counter = (int16_t) led[id].blink_rate;
+		led[id].effect_counter = (int16_t) led[id].effect_rate;
 
 		// Update total blinks left
-		led[id].blink_duration--;
+		led[id].effect_duration--;
 	}
 	
 	// Remaining time to toggle
-	led[id].blink_counter -= USER_IO_HANDLER_PERIOD_MS;
+	led[id].effect_counter -= USER_IO_HANDLER_PERIOD_MS;
 }
 
 
@@ -792,7 +790,7 @@ static void led_handle_effect_off(enum led_id id) {
  */
 static void led_handle_effect_pulse(enum led_id id) {
 	// Pulse effect done
-	if (led[id].pulse_duration <= 0) {
+	if (led[id].effect_duration <= 0) {
 		led_driver_off(id);
 		
 		led[id].set_state = OFF;
@@ -807,7 +805,7 @@ static void led_handle_effect_pulse(enum led_id id) {
 	}
 		
 	// Remaining effect time
-	led[id].pulse_duration -= USER_IO_HANDLER_PERIOD_MS;	
+	led[id].effect_duration -= USER_IO_HANDLER_PERIOD_MS;	
 }
 
 
@@ -830,12 +828,12 @@ static void led_handle_effect_on(enum led_id id) {
 
 #ifdef INTERVALS_USE
 /**
- * @fn uint8_t interval_reached_ms(enum interval_id, uint32_t)
+ * @fn bool interval_reached_ms(enum interval_id, uint32_t)
  * @brief Checks to see if ms interval is reached since last check
  * 
  * @param id (enum interval_id) interval to check
  * @param ms (uint32_t) run at ms interval
- * @return (uint8_t) true or false
+ * @return (bool)
  * 
  * @note Can count up to ~49 days, 2^32 ms, before overflow
  */
