@@ -10,7 +10,7 @@
  *
  * ------------------------------
  *
- * @brief Library for buttons and LEDs
+ * @brief Library header
  *
  */
 

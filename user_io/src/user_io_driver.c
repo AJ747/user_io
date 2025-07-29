@@ -10,7 +10,7 @@
  *
  * ------------------------------
  *
- * @brief Driver-layer for buttons and LEDs
+ * @brief Driver-layer source
  *
  */
 

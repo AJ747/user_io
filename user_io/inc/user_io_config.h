@@ -10,7 +10,7 @@
  *
  * ------------------------------
  *
- * @brief Definitions for user_io library
+ * @brief Library config
  *
  */
 
