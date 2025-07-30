@@ -31,7 +31,7 @@
 // Define begin
 //---------------------------//
 #ifdef BTNS_USE
-#define BTNS_IDLE_MS_MAX (0xFFFFFFFF - USER_IO_HANDLER_PERIOD_MS)
+#define BTNS_IDLE_MS_MAX (0xFFFFFFFFU - USER_IO_HANDLER_PERIOD_MS)
 #define BTN_DEBOUNCE_TRESHOLD (BTN_DEBOUNCE_TRESHOLD_MS / USER_IO_HANDLER_PERIOD_MS)
 #endif
 //---------------------------//
@@ -131,7 +131,7 @@ static void intervals_update(void);
 // Variable begin
 //---------------------------//
 #ifdef ALTERNATIVE_IRQ_METHOD
-volatile uint8_t user_io_handle_rdy = 0;
+volatile bool user_io_handle_rdy = false;
 #endif
 
 
