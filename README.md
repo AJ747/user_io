@@ -419,22 +419,22 @@ int main(void) {
             led_all_off();
         }
 
-	// Prints every 1000 ms 
-	if (interval_reached_ms(INTERVAL0, 1000)) {
-		printf("Hello, World!");
-	}
-
-	// Force all leds off if switch on
-	if (switch_on(SW0)) {
-		led_all_force_off();
-	}
-
-	// Enters sleep if no input for 60 sec
-	if (btns_no_input_ms(60000)) {
-		...
-		screen_off();
-		enter_sleep();
-	}
+		// Prints every 1000 ms 
+		if (interval_reached_ms(INTERVAL0, 1000)) {
+			printf("Hello, World!");
+		}
+	
+		// Force all leds off if switch on
+		if (switch_on(SW0)) {
+			led_all_force_off();
+		}
+	
+		// Enters sleep if no input for 60 sec
+		if (btns_no_input_ms(60000)) {
+			...
+			screen_off();
+			enter_sleep();
+		}
     }
 }
 
